@@ -15,6 +15,8 @@ static LightViewControllers *sharedPlugin;
 @interface LightViewControllers : NSObject
 
 + (instancetype)sharedPlugin;
+
+
 - (id)initWithBundle:(NSBundle *)plugin;
 
 @property (nonatomic, strong, readonly) NSBundle* bundle;
