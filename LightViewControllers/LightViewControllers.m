@@ -31,9 +31,13 @@ static NSString *const IDEEditorDocumentDidChangeNotification = @"IDEEditorDocum
 
 - (void)documentDidChange:(NSNotification *)notification;
 - (void)swizzleTextDidChangeInSourceView;
-- (void)updateUI;
+- (void)updateUIWithSourceTextView:(NSView /*DVTSourceTextView*/ *)sourceTextView;
 - (ViewControllerState)determineViewControllerStateForLineCount:(NSInteger)lineCount;
 - (BOOL)isViewController:(NSString *__nonnull)fileName;
+
++ (NSColor *)goodColor;
++ (NSColor *)warningColor;
++ (NSColor *)badColor;
 @end
 
 @implementation LightViewControllers
@@ -66,7 +70,6 @@ static NSString *const IDEEditorDocumentDidChangeNotification = @"IDEEditorDocum
 }
 
 - (void)documentDidChange:(NSNotification *)notification {
-    NSLog(@"Class %@", [notification.object class]);
     id document = notification.object;
 
     if (![NSStringFromClass([document class]) isEqualTo:@"IDESourceCodeDocument"]) {
@@ -86,7 +89,6 @@ static NSString *const IDEEditorDocumentDidChangeNotification = @"IDEEditorDocum
 
     self.currentTexStorage = textStorage;
     self.currentDocument = document;
-    [self updateUI];
 }
 
 
@@ -94,11 +96,15 @@ static NSString *const IDEEditorDocumentDidChangeNotification = @"IDEEditorDocum
     [objc_getClass("DVTSourceTextView") aspect_hookSelector:@selector(didChangeText)
                                                 withOptions:AspectPositionAfter
                                                  usingBlock:^(id<AspectInfo> info) {
-                                                     [self updateUI];
+                                                     [self updateUIWithSourceTextView:[info instance]];
                                                  } error:nil];
 }
 
-- (void)updateUI {
+- (void)updateUIWithSourceTextView:(NSView *)sourceTextView {
+    if (![NSStringFromClass([sourceTextView class]) isEqualToString:@"DVTSourceTextView"]) {
+        return;
+    }
+
     SEL numberOfLinesSelector = NSSelectorFromString(@"numberOfLines");
     if (![self.currentTexStorage respondsToSelector:numberOfLinesSelector]) {
         return;
@@ -119,22 +125,42 @@ static NSString *const IDEEditorDocumentDidChangeNotification = @"IDEEditorDocum
 
     IMP implementation = [self.currentTexStorage methodForSelector:numberOfLinesSelector];
     NSInteger linesOfCode = ((NSInteger (*) (id,SEL))implementation)(self.currentTexStorage, numberOfLinesSelector);
-    NSLog(@"Number of lines %ld", linesOfCode);
     ViewControllerState state = [self determineViewControllerStateForLineCount:linesOfCode];
 
+    NSView *__nullable sideBarView = nil;
+    for (NSView *view in sourceTextView.superview.superview.subviews) {
+        if ([NSStringFromClass([view class]) isEqualToString:@"DVTTextSidebarView"]) {
+            sideBarView = view;
+            break;
+        }
+    }
+
+    if (nil == sideBarView) {
+        return;
+    }
+
+    SEL setBackgroundColorSelector = NSSelectorFromString(@"setSidebarBackgroundColor:");
+
+    if (![sideBarView respondsToSelector:setBackgroundColorSelector]) {
+        return;
+    }
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     switch (state) {
         case ViewControllerStateGood:
-            NSLog(@"All's well");
+            [sideBarView performSelector:setBackgroundColorSelector withObject:[[self class] goodColor]];
             break;
         case ViewControllerStateWarning:
-            NSLog(@"Keep an eye on those lines");
+            [sideBarView performSelector:setBackgroundColorSelector withObject:[[self class] warningColor]];
             break;
         case ViewControllerStateBad:
-            NSLog(@"RED RED RED");
+            [sideBarView performSelector:setBackgroundColorSelector withObject:[[self class] badColor]];
             break;
         default:
             break;
     }
+#pragma clang diagnostic pop
 }
 
 - (ViewControllerState)determineViewControllerStateForLineCount:(NSInteger)lineCount {
@@ -153,6 +179,19 @@ static NSString *const IDEEditorDocumentDidChangeNotification = @"IDEEditorDocum
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
++ (NSColor *)goodColor {
+    return [NSColor colorWithCalibratedRed: 0.2 green: 0.51 blue: 0.0471 alpha: 0.5];
+}
+
++ (NSColor *)warningColor {
+    return [NSColor colorWithCalibratedRed: 0.49 green: 0.51 blue: 0.0471 alpha: 0.5];
+}
+
++ (NSColor *)badColor {
+    return [NSColor colorWithCalibratedRed: 0.51 green: 0.0471 blue: 0.0471 alpha: 0.5];
+
 }
 
 @end
