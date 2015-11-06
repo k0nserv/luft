@@ -1,12 +1,12 @@
 //
-//  LightViewControllers.m
-//  LightViewControllers
+//  Luft.m
+//  Luft
 //
 //  Created by Hugo Tunius on 05/11/15.
 //  Copyright © 2015 Hugo Tunius. All rights reserved.
 //
 
-#import "LightViewControllers.h"
+#import "Luft.h"
 
 #import "Aspects.h"
 #import <objc/runtime.h>
@@ -24,7 +24,7 @@ static NSString *const IDEEditorDocumentDidChangeNotification = @"IDEEditorDocum
 
 static BOOL debug = YES;
 
-@interface LightViewControllers()
+@interface Luft()
 @property (nonatomic, strong, readwrite) NSBundle *bundle;
 @property (nonatomic, strong) NSMutableSet *__nonnull seenNotifications;
 @property (nonatomic, strong) id /* DVTTextStorage * */ currentTexStorage;
@@ -42,7 +42,7 @@ static BOOL debug = YES;
 + (NSColor *)badColor;
 @end
 
-@implementation LightViewControllers
+@implementation Luft
 
 + (instancetype)sharedPlugin {
     return sharedPlugin;

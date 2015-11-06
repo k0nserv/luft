@@ -1,6 +1,6 @@
 //
-//  LightViewControllers.h
-//  LightViewControllers
+//  Luft.h
+//  Luft
 //
 //  Created by Hugo Tunius on 05/11/15.
 //  Copyright © 2015 Hugo Tunius. All rights reserved.
@@ -8,11 +8,11 @@
 
 #import <AppKit/AppKit.h>
 
-@class LightViewControllers;
+@class Luft;
 
-static LightViewControllers *sharedPlugin;
+static Luft *sharedPlugin;
 
-@interface LightViewControllers : NSObject
+@interface Luft : NSObject
 
 + (instancetype)sharedPlugin;
 

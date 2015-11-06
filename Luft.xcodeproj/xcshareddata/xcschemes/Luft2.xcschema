@@ -15,23 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D691C0B41BEBDB1400FBE1B7"
-               BuildableName = "LightViewControllers.xcplugin"
-               BlueprintName = "LightViewControllers"
-               ReferencedContainer = "container:LightViewControllers.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8966AFCA173EB7BF004150C0"
-               BuildableName = "LightViewControllersTests.xctest"
-               BlueprintName = "LightViewControllersTests"
-               ReferencedContainer = "container:LightViewControllers.xcodeproj">
+               BuildableName = "Luft.xcplugin"
+               BlueprintName = "Luft"
+               ReferencedContainer = "container:Luft.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -43,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D691C0B41BEBDB1400FBE1B7"
+            BuildableName = "Luft.xcplugin"
+            BlueprintName = "Luft"
+            ReferencedContainer = "container:Luft.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -60,15 +55,16 @@
       viewDebuggingEnabled = "No">
       <PathRunnable
          runnableDebuggingMode = "0"
+         BundleIdentifier = "com.apple.dt.Xcode"
          FilePath = "/Applications/Xcode.app">
       </PathRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D691C0B41BEBDB1400FBE1B7"
-            BuildableName = "LightViewControllers.xcplugin"
-            BlueprintName = "LightViewControllers"
-            ReferencedContainer = "container:LightViewControllers.xcodeproj">
+            BuildableName = "Luft.xcplugin"
+            BlueprintName = "Luft"
+            ReferencedContainer = "container:Luft.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -80,6 +76,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D691C0B41BEBDB1400FBE1B7"
+            BuildableName = "Luft.xcplugin"
+            BlueprintName = "Luft"
+            ReferencedContainer = "container:Luft.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

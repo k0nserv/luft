@@ -7,26 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D637E0AC1BED246B00A71C48 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D637E0A71BED246B00A71C48 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
+		D637E0AD1BED246B00A71C48 /* Luft.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0A91BED246B00A71C48 /* Luft.m */; settings = {ASSET_TAGS = (); }; };
+		D637E0AE1BED246B00A71C48 /* NSObject_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0AB1BED246B00A71C48 /* NSObject_Extension.m */; settings = {ASSET_TAGS = (); }; };
+		D637E0B21BED247200A71C48 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0B11BED247200A71C48 /* Aspects.m */; settings = {ASSET_TAGS = (); }; };
 		D691C0B91BEBDB1500FBE1B7 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D691C0B81BEBDB1500FBE1B7 /* AppKit.framework */; settings = {ASSET_TAGS = (); }; };
 		D691C0BB1BEBDB1500FBE1B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D691C0BA1BEBDB1500FBE1B7 /* Foundation.framework */; settings = {ASSET_TAGS = (); }; };
-		D691C0BF1BEBDB1500FBE1B7 /* LightViewControllers.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = D691C0BE1BEBDB1500FBE1B7 /* LightViewControllers.xcscheme */; };
-		D691C0C21BEBDB1500FBE1B7 /* LightViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = D691C0C11BEBDB1500FBE1B7 /* LightViewControllers.m */; };
-		D691C0C51BEBDB1500FBE1B7 /* NSObject_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D691C0C41BEBDB1500FBE1B7 /* NSObject_Extension.m */; };
-		D691C0CF1BEBE05200FBE1B7 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = D691C0CE1BEBE05200FBE1B7 /* Aspects.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D691C0B51BEBDB1500FBE1B7 /* LightViewControllers.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightViewControllers.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		D637E0A71BED246B00A71C48 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D637E0A81BED246B00A71C48 /* Luft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Luft.h; sourceTree = "<group>"; };
+		D637E0A91BED246B00A71C48 /* Luft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Luft.m; sourceTree = "<group>"; };
+		D637E0AA1BED246B00A71C48 /* NSObject_Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObject_Extension.h; sourceTree = "<group>"; };
+		D637E0AB1BED246B00A71C48 /* NSObject_Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObject_Extension.m; sourceTree = "<group>"; };
+		D637E0B01BED247200A71C48 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
+		D637E0B11BED247200A71C48 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
+		D691C0B51BEBDB1500FBE1B7 /* Luft.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Luft.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		D691C0B81BEBDB1500FBE1B7 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		D691C0BA1BEBDB1500FBE1B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		D691C0BE1BEBDB1500FBE1B7 /* LightViewControllers.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = LightViewControllers.xcscheme; path = LightViewControllers.xcodeproj/xcshareddata/xcschemes/LightViewControllers.xcscheme; sourceTree = SOURCE_ROOT; };
-		D691C0C01BEBDB1500FBE1B7 /* LightViewControllers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LightViewControllers.h; sourceTree = "<group>"; };
-		D691C0C11BEBDB1500FBE1B7 /* LightViewControllers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LightViewControllers.m; sourceTree = "<group>"; };
-		D691C0C31BEBDB1500FBE1B7 /* NSObject_Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSObject_Extension.h; sourceTree = "<group>"; };
-		D691C0C41BEBDB1500FBE1B7 /* NSObject_Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSObject_Extension.m; sourceTree = "<group>"; };
-		D691C0C61BEBDB1500FBE1B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D691C0CD1BEBE05200FBE1B7 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
-		D691C0CE1BEBE05200FBE1B7 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,10 +41,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D637E0A61BED246B00A71C48 /* Luft */ = {
+			isa = PBXGroup;
+			children = (
+				D637E0A71BED246B00A71C48 /* Info.plist */,
+				D637E0A81BED246B00A71C48 /* Luft.h */,
+				D637E0A91BED246B00A71C48 /* Luft.m */,
+				D637E0AA1BED246B00A71C48 /* NSObject_Extension.h */,
+				D637E0AB1BED246B00A71C48 /* NSObject_Extension.m */,
+			);
+			path = Luft;
+			sourceTree = "<group>";
+		};
+		D637E0AF1BED247200A71C48 /* contrib */ = {
+			isa = PBXGroup;
+			children = (
+				D637E0B01BED247200A71C48 /* Aspects.h */,
+				D637E0B11BED247200A71C48 /* Aspects.m */,
+			);
+			path = contrib;
+			sourceTree = "<group>";
+		};
 		D691C0AC1BEBDB1400FBE1B7 = {
 			isa = PBXGroup;
 			children = (
-				D691C0BC1BEBDB1500FBE1B7 /* LightViewControllers */,
+				D637E0AF1BED247200A71C48 /* contrib */,
+				D637E0A61BED246B00A71C48 /* Luft */,
 				D691C0B71BEBDB1500FBE1B7 /* Frameworks */,
 				D691C0B61BEBDB1500FBE1B7 /* Products */,
 			);
@@ -54,7 +75,7 @@
 		D691C0B61BEBDB1500FBE1B7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D691C0B51BEBDB1500FBE1B7 /* LightViewControllers.xcplugin */,
+				D691C0B51BEBDB1500FBE1B7 /* Luft.xcplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -68,43 +89,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D691C0BC1BEBDB1500FBE1B7 /* LightViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				D691C0CC1BEBE05200FBE1B7 /* contrib */,
-				D691C0C01BEBDB1500FBE1B7 /* LightViewControllers.h */,
-				D691C0C11BEBDB1500FBE1B7 /* LightViewControllers.m */,
-				D691C0C31BEBDB1500FBE1B7 /* NSObject_Extension.h */,
-				D691C0C41BEBDB1500FBE1B7 /* NSObject_Extension.m */,
-				D691C0C61BEBDB1500FBE1B7 /* Info.plist */,
-				D691C0BD1BEBDB1500FBE1B7 /* Supporting Files */,
-			);
-			path = LightViewControllers;
-			sourceTree = "<group>";
-		};
-		D691C0BD1BEBDB1500FBE1B7 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				D691C0BE1BEBDB1500FBE1B7 /* LightViewControllers.xcscheme */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D691C0CC1BEBE05200FBE1B7 /* contrib */ = {
-			isa = PBXGroup;
-			children = (
-				D691C0CD1BEBE05200FBE1B7 /* Aspects.h */,
-				D691C0CE1BEBE05200FBE1B7 /* Aspects.m */,
-			);
-			path = contrib;
-			sourceTree = SOURCE_ROOT;
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D691C0B41BEBDB1400FBE1B7 /* LightViewControllers */ = {
+		D691C0B41BEBDB1400FBE1B7 /* Luft */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D691C0C91BEBDB1500FBE1B7 /* Build configuration list for PBXNativeTarget "LightViewControllers" */;
+			buildConfigurationList = D691C0C91BEBDB1500FBE1B7 /* Build configuration list for PBXNativeTarget "Luft" */;
 			buildPhases = (
 				D691C0B11BEBDB1400FBE1B7 /* Sources */,
 				D691C0B21BEBDB1400FBE1B7 /* Resources */,
@@ -114,9 +104,9 @@
 			);
 			dependencies = (
 			);
-			name = LightViewControllers;
-			productName = LightViewControllers;
-			productReference = D691C0B51BEBDB1500FBE1B7 /* LightViewControllers.xcplugin */;
+			name = Luft;
+			productName = Luft;
+			productReference = D691C0B51BEBDB1500FBE1B7 /* Luft.xcplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -133,7 +123,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D691C0B01BEBDB1400FBE1B7 /* Build configuration list for PBXProject "LightViewControllers" */;
+			buildConfigurationList = D691C0B01BEBDB1400FBE1B7 /* Build configuration list for PBXProject "Luft" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -145,7 +135,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D691C0B41BEBDB1400FBE1B7 /* LightViewControllers */,
+				D691C0B41BEBDB1400FBE1B7 /* Luft */,
 			);
 		};
 /* End PBXProject section */
@@ -155,7 +145,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D691C0BF1BEBDB1500FBE1B7 /* LightViewControllers.xcscheme in Resources */,
+				D637E0AC1BED246B00A71C48 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,9 +156,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D691C0C21BEBDB1500FBE1B7 /* LightViewControllers.m in Sources */,
-				D691C0C51BEBDB1500FBE1B7 /* NSObject_Extension.m in Sources */,
-				D691C0CF1BEBE05200FBE1B7 /* Aspects.m in Sources */,
+				D637E0AD1BED246B00A71C48 /* Luft.m in Sources */,
+				D637E0AE1BED246B00A71C48 /* NSObject_Extension.m in Sources */,
+				D637E0B21BED247200A71C48 /* Aspects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,10 +245,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = "$(HOME)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = LightViewControllers/Info.plist;
+				INFOPLIST_FILE = Luft/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = org.hugotunius.LightViewControllers;
+				PRODUCT_BUNDLE_IDENTIFIER = org.hugotunius.Luft;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xcplugin;
 			};
@@ -271,10 +261,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = "$(HOME)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = LightViewControllers/Info.plist;
+				INFOPLIST_FILE = Luft/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = org.hugotunius.LightViewControllers;
+				PRODUCT_BUNDLE_IDENTIFIER = org.hugotunius.Luft;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xcplugin;
 			};
@@ -283,7 +273,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D691C0B01BEBDB1400FBE1B7 /* Build configuration list for PBXProject "LightViewControllers" */ = {
+		D691C0B01BEBDB1400FBE1B7 /* Build configuration list for PBXProject "Luft" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D691C0C71BEBDB1500FBE1B7 /* Debug */,
@@ -292,13 +282,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D691C0C91BEBDB1500FBE1B7 /* Build configuration list for PBXNativeTarget "LightViewControllers" */ = {
+		D691C0C91BEBDB1500FBE1B7 /* Build configuration list for PBXNativeTarget "Luft" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D691C0CA1BEBDB1500FBE1B7 /* Debug */,
 				D691C0CB1BEBDB1500FBE1B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

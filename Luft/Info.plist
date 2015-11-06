@@ -35,7 +35,7 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>NSPrincipalClass</key>
-	<string>LightViewControllers</string>
+	<string>Luft</string>
 	<key>XC4Compatible</key>
 	<true/>
 	<key>XCPluginHasUI</key>
