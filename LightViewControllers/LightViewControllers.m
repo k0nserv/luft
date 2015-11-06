@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, ViewControllerState) {
  */
 static NSString *const IDEEditorDocumentDidChangeNotification = @"IDEEditorDocumentDidChangeNotification";
 
+static BOOL debug = YES;
 
 @interface LightViewControllers()
 @property (nonatomic, strong, readwrite) NSBundle *bundle;
@@ -29,6 +30,7 @@ static NSString *const IDEEditorDocumentDidChangeNotification = @"IDEEditorDocum
 @property (nonatomic, strong) id /* DVTTextStorage * */ currentTexStorage;
 @property (nonatomic, strong) id /* IDESourceCodeDocument * */ currentDocument;
 
+- (void)traceNotifications:(NSNotification *)notification;
 - (void)documentDidChange:(NSNotification *)notification;
 - (void)swizzleTextDidChangeInSourceView;
 - (void)updateUIWithSourceTextView:(NSView /*DVTSourceTextView*/ *)sourceTextView;
@@ -60,6 +62,10 @@ static NSString *const IDEEditorDocumentDidChangeNotification = @"IDEEditorDocum
                                                      name:IDEEditorDocumentDidChangeNotification
                                                    object:nil];
 
+        if (debug) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(traceNotifications:) name:nil object:nil];
+        }
+
         [self performSelector:@selector(swizzleTextDidChangeInSourceView)];
     }
     return self;
@@ -67,6 +73,19 @@ static NSString *const IDEEditorDocumentDidChangeNotification = @"IDEEditorDocum
 
 - (void)didApplicationFinishLaunchingNotification:(NSNotification*)noti {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSApplicationDidFinishLaunchingNotification object:nil];
+}
+
+- (void)traceNotifications:(NSNotification *)notification {
+    if ([notification.name isEqualToString:@"IDEEditorAreaLastActiveEditorContextDidChangeNotification"]) {
+
+    } else {
+        return;
+    }
+
+    // Swizzle _setEditorModeViewControllerWithPrimaryEditorContext of IDEEditorArea
+    if ([notification.name hasPrefix:@"IDE"] || [notification.name hasPrefix:@"DVT"]) {
+        NSLog(@"Notification with name: %@, Class: %@", notification.name, [notification.object class]);
+    }
 }
 
 - (void)documentDidChange:(NSNotification *)notification {
