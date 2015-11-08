@@ -36,7 +36,7 @@ static BOOL debug = YES;
 - (void)swizzleTextDidChangeInSourceView;
 - (void)updateUIWithSourceTextView:(NSView /*DVTSourceTextView*/ *)sourceTextView;
 - (ViewControllerState)determineViewControllerStateForLineCount:(NSInteger)lineCount;
-- (BOOL)isViewController:(NSString *__nonnull)fileName;
+- (BOOL)isViewController:(NSString *__nonnull)filename;
 
 + (NSColor *)goodColor;
 + (NSColor *)warningColor;
@@ -205,8 +205,13 @@ static BOOL debug = YES;
     }
 }
 
-- (BOOL)isViewController:(NSString *)fileName {
-    return [[fileName lowercaseString] rangeOfString:@"viewcontroller"].location != NSNotFound;
+- (BOOL)isViewController:(NSString *)filename {
+    NSString *lowerCaseFilename = [filename lowercaseString];
+    BOOL isViewController = [lowerCaseFilename rangeOfString:@"viewcontroller"].location != NSNotFound;
+    BOOL isImplementationOrSwift = [lowerCaseFilename rangeOfString:@".m"].location != NSNotFound || [lowerCaseFilename rangeOfString:@".swift"].location != NSNotFound;
+    isViewController = isViewController && isImplementationOrSwift;
+    return isViewController;
+
 }
 
 - (void)dealloc {
