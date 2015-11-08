@@ -21,20 +21,18 @@ typedef NS_ENUM(NSInteger, ViewControllerState) {
  * Triggered when the open document changes
  */
 static NSString *const IDEEditorDocumentDidChangeNotification = @"IDEEditorDocumentDidChangeNotification";
+static NSString *const IDEEditorDocumentWillSaveNotification = @"IDEEditorDocumentWillSaveNotification";
 
 static BOOL debug = YES;
 
 @interface Luft()
 @property (nonatomic, strong, readwrite) NSBundle *bundle;
 @property (nonatomic, strong) NSMutableSet *__nonnull seenNotifications;
-@property (nonatomic, strong) id /* DVTTextStorage * */ currentTexStorage;
-@property (nonatomic, strong) id /* IDESourceCodeDocument * */ currentDocument;
-@property (nonatomic) NSInteger cachedLineCount;
 
 - (void)traceNotifications:(NSNotification *)notification;
 - (void)documentDidChange:(NSNotification *)notification;
-- (void)swizzleTextDidChangeInSourceView;
-- (void)updateUIWithSourceTextView:(NSView /*DVTSourceTextView*/ *)sourceTextView;
+- (void)updateUIWithSourceTextView:(NSView /*DVTSourceTextView*/ *)sourceTextView
+                          document:(id /* IDESourceCodeDocument * */)document;
 - (ViewControllerState)determineViewControllerStateForLineCount:(NSInteger)lineCount;
 - (BOOL)isViewController:(NSString *__nonnull)filename;
 
@@ -62,13 +60,14 @@ static BOOL debug = YES;
                                                  selector:@selector(documentDidChange:)
                                                      name:IDEEditorDocumentDidChangeNotification
                                                    object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(documentDidChange:)
+                                                     name:IDEEditorDocumentWillSaveNotification
+                                                   object:nil];
 
         if (debug) {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(traceNotifications:) name:nil object:nil];
         }
-        self.cachedLineCount = -1;
-
-        [self performSelector:@selector(swizzleTextDidChangeInSourceView)];
     }
     return self;
 }
@@ -78,21 +77,14 @@ static BOOL debug = YES;
 }
 
 - (void)traceNotifications:(NSNotification *)notification {
-    if ([notification.name isEqualToString:@"IDEEditorAreaLastActiveEditorContextDidChangeNotification"]) {
-
-    } else {
-        return;
-    }
-
-    // Swizzle _setEditorModeViewControllerWithPrimaryEditorContext of IDEEditorArea
     if ([notification.name hasPrefix:@"IDE"] || [notification.name hasPrefix:@"DVT"]) {
         NSLog(@"Notification with name: %@, Class: %@", notification.name, [notification.object class]);
     }
 }
 
 - (void)documentDidChange:(NSNotification *)notification {
-    self.cachedLineCount = -1;
     id document = notification.object;
+    NSLog(@"Document did changeIDEEditorDocumentDidChangeNotification");
 
     if (![NSStringFromClass([document class]) isEqualTo:@"IDESourceCodeDocument"]) {
         return;
@@ -102,62 +94,48 @@ static BOOL debug = YES;
         return;
     }
 
-    
+    id firstResponder = [[NSApp mainWindow] firstResponder];
+    if ([NSStringFromClass([firstResponder class]) isEqualToString:@"DVTSourceTextView"]) {
+        [self updateUIWithSourceTextView:(NSView *)firstResponder document:document];
+    }
+}
+
+- (void)updateUIWithSourceTextView:(NSView *)sourceTextView document:(id)document {
+    if (![NSStringFromClass([sourceTextView class]) isEqualToString:@"DVTSourceTextView"]) {
+        return;
+    }
+
+    if (![NSStringFromClass([document class]) isEqualTo:@"IDESourceCodeDocument"]) {
+        return;
+    }
+
     id textStorage = [document textStorage];
 
     if (![NSStringFromClass([textStorage class]) isEqualToString:@"DVTTextStorage"]) {
         return;
     }
 
-    self.currentTexStorage = textStorage;
-    self.currentDocument = document;
-
-    id firstResponder = [[NSApp mainWindow] firstResponder];
-    if ([NSStringFromClass([firstResponder class]) isEqualToString:@"DVTSourceTextView"]) {
-        [self updateUIWithSourceTextView:(NSView *)firstResponder];
-    }
-}
-
-
-- (void)swizzleTextDidChangeInSourceView {
-    [objc_getClass("DVTSourceTextView") aspect_hookSelector:@selector(didChangeText)
-                                                withOptions:AspectPositionAfter
-                                                 usingBlock:^(id<AspectInfo> info) {
-                                                     [self updateUIWithSourceTextView:[info instance]];
-                                                 } error:nil];
-}
-
-- (void)updateUIWithSourceTextView:(NSView *)sourceTextView {
-    if (![NSStringFromClass([sourceTextView class]) isEqualToString:@"DVTSourceTextView"]) {
-        return;
-    }
-
     SEL numberOfLinesSelector = NSSelectorFromString(@"numberOfLines");
-    if (![self.currentTexStorage respondsToSelector:numberOfLinesSelector]) {
+    if (![textStorage respondsToSelector:numberOfLinesSelector]) {
         return;
     }
 
     SEL displayNameSelector = NSSelectorFromString(@"displayName");
-    if (![self.currentDocument respondsToSelector:displayNameSelector]) {
+    if (![document respondsToSelector:displayNameSelector]) {
         return;
     }
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    NSString *displayName = [self.currentDocument performSelector:displayNameSelector];
+    NSString *displayName = [document performSelector:displayNameSelector];
 #pragma clang diagnostic pop
     if (![self isViewController:displayName]) {
         return;
     }
 
-    IMP implementation = [self.currentTexStorage methodForSelector:numberOfLinesSelector];
-    NSInteger linesOfCode = ((NSInteger (*) (id,SEL))implementation)(self.currentTexStorage, numberOfLinesSelector);
+    IMP implementation = [textStorage methodForSelector:numberOfLinesSelector];
+    NSInteger linesOfCode = ((NSInteger (*) (id,SEL))implementation)(textStorage, numberOfLinesSelector);
     ViewControllerState state = [self determineViewControllerStateForLineCount:linesOfCode];
-    if (linesOfCode == self.cachedLineCount) {
-        return;
-    }
-
-    self.cachedLineCount = linesOfCode;
 
     NSView *__nullable sideBarView = nil;
     for (NSView *view in sourceTextView.superview.superview.subviews) {
