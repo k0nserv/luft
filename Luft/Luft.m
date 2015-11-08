@@ -108,6 +108,11 @@ static BOOL debug = YES;
 
     self.currentTexStorage = textStorage;
     self.currentDocument = document;
+
+    id firstResponder = [[NSApp mainWindow] firstResponder];
+    if ([NSStringFromClass([firstResponder class]) isEqualToString:@"DVTSourceTextView"]) {
+        [self updateUIWithSourceTextView:(NSView *)firstResponder];
+    }
 }
 
 
