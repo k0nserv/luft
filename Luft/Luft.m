@@ -29,6 +29,7 @@ static BOOL debug = YES;
 @property (nonatomic, strong) NSMutableSet *__nonnull seenNotifications;
 @property (nonatomic, strong) id /* DVTTextStorage * */ currentTexStorage;
 @property (nonatomic, strong) id /* IDESourceCodeDocument * */ currentDocument;
+@property (nonatomic) NSInteger cachedLineCount;
 
 - (void)traceNotifications:(NSNotification *)notification;
 - (void)documentDidChange:(NSNotification *)notification;
@@ -65,6 +66,7 @@ static BOOL debug = YES;
         if (debug) {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(traceNotifications:) name:nil object:nil];
         }
+        self.cachedLineCount = -1;
 
         [self performSelector:@selector(swizzleTextDidChangeInSourceView)];
     }
@@ -89,6 +91,7 @@ static BOOL debug = YES;
 }
 
 - (void)documentDidChange:(NSNotification *)notification {
+    self.cachedLineCount = -1;
     id document = notification.object;
 
     if (![NSStringFromClass([document class]) isEqualTo:@"IDESourceCodeDocument"]) {
@@ -150,6 +153,11 @@ static BOOL debug = YES;
     IMP implementation = [self.currentTexStorage methodForSelector:numberOfLinesSelector];
     NSInteger linesOfCode = ((NSInteger (*) (id,SEL))implementation)(self.currentTexStorage, numberOfLinesSelector);
     ViewControllerState state = [self determineViewControllerStateForLineCount:linesOfCode];
+    if (linesOfCode == self.cachedLineCount) {
+        return;
+    }
+
+    self.cachedLineCount = linesOfCode;
 
     NSView *__nullable sideBarView = nil;
     for (NSView *view in sourceTextView.superview.superview.subviews) {
