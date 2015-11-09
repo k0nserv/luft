@@ -13,7 +13,7 @@ By default the following rules are used to determine the color of the gutter
 | Number of lines  | Status |
 |------------------|--------|
 | < 150            | ✅     |
-| >= 150 and < 300 | ⚠️     |
+| >= 150 and <= 300| ⚠️     |
 | > 300            | ⛔️     |
  
 
