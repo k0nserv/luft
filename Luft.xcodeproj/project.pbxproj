@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D637E0AC1BED246B00A71C48 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D637E0A71BED246B00A71C48 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
-		D637E0AD1BED246B00A71C48 /* Luft.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0A91BED246B00A71C48 /* Luft.m */; settings = {ASSET_TAGS = (); }; };
-		D637E0AE1BED246B00A71C48 /* NSObject_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0AB1BED246B00A71C48 /* NSObject_Extension.m */; settings = {ASSET_TAGS = (); }; };
-		D637E0B21BED247200A71C48 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0B11BED247200A71C48 /* Aspects.m */; settings = {ASSET_TAGS = (); }; };
-		D691C0B91BEBDB1500FBE1B7 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D691C0B81BEBDB1500FBE1B7 /* AppKit.framework */; settings = {ASSET_TAGS = (); }; };
-		D691C0BB1BEBDB1500FBE1B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D691C0BA1BEBDB1500FBE1B7 /* Foundation.framework */; settings = {ASSET_TAGS = (); }; };
+		D637E0AC1BED246B00A71C48 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D637E0A71BED246B00A71C48 /* Info.plist */; };
+		D637E0AD1BED246B00A71C48 /* Luft.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0A91BED246B00A71C48 /* Luft.m */; };
+		D637E0AE1BED246B00A71C48 /* NSObject_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0AB1BED246B00A71C48 /* NSObject_Extension.m */; };
+		D637E0B21BED247200A71C48 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0B11BED247200A71C48 /* Aspects.m */; };
+		D691C0B91BEBDB1500FBE1B7 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D691C0B81BEBDB1500FBE1B7 /* AppKit.framework */; };
+		D691C0BB1BEBDB1500FBE1B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D691C0BA1BEBDB1500FBE1B7 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
