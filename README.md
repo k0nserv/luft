@@ -15,7 +15,10 @@ By default the following rules are used to determine the color of the gutter
 | < 150            | ✅     |
 | >= 150 and <= 300| ⚠️     |
 | > 300            | ⛔️     |
- 
+
+## Known Issues
+
++ Having the same file open in the assistant editor will not correctly reflect changes made in the active editor  
 
 
 ## License
