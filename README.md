@@ -20,6 +20,9 @@ By default the following rules are used to determine the color of the gutter
 
 + Having the same file open in the assistant editor will not correctly reflect changes made in the active editor  
 
+## Screenshots
+
+![](Screenshots/screenshot.png)
 
 ## License
 MIT, see `LICENSE.md`
