@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D637E0AC1BED246B00A71C48 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D637E0A71BED246B00A71C48 /* Info.plist */; };
 		D637E0AD1BED246B00A71C48 /* Luft.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0A91BED246B00A71C48 /* Luft.m */; };
 		D637E0AE1BED246B00A71C48 /* NSObject_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0AB1BED246B00A71C48 /* NSObject_Extension.m */; };
 		D637E0B21BED247200A71C48 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0B11BED247200A71C48 /* Aspects.m */; };
@@ -39,8 +38,7 @@
 		D6ACBB0A1BF8CFD0004C8164 /* IDEEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEEditor.h; sourceTree = "<group>"; };
 		D6ACBB0B1BF8CFF9004C8164 /* IDEViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEViewController.h; sourceTree = "<group>"; };
 		D6ACBB0C1BF8D022004C8164 /* DVTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTViewController.h; sourceTree = "<group>"; };
-		D6ACBB0D1BF8D267004C8164 /* Xcode.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Xcode.app; path = ../../../../../Applications/Xcode.app; sourceTree = "<group>"; };
-		D6ACBB101BF8D2A4004C8164 /* IDESourceEditor */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = IDESourceEditor; path = ../../../../../Applications/Xcode.app/Contents/PlugIns/IDESourceEditor.ideplugin/Contents/MacOS/IDESourceEditor; sourceTree = "<group>"; };
+		D6ACBB101BF8D2A4004C8164 /* IDESourceEditor */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = IDESourceEditor; path =     ../PlugIns/IDESourceEditor.ideplugin/Contents/MacOS/IDESourceEditor; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				D6ACBB101BF8D2A4004C8164 /* IDESourceEditor */,
-				D6ACBB0D1BF8D267004C8164 /* Xcode.app */,
 				D691C0B81BEBDB1500FBE1B7 /* AppKit.framework */,
 				D691C0BA1BEBDB1500FBE1B7 /* Foundation.framework */,
 			);
@@ -152,7 +149,7 @@
 		D691C0AD1BEBDB1400FBE1B7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Hugo Tunius";
 				TargetAttributes = {
 					D691C0B41BEBDB1400FBE1B7 = {
@@ -182,7 +179,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D637E0AC1BED246B00A71C48 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
