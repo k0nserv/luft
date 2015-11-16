@@ -8,12 +8,18 @@
 
 #import "LuftSettings.h"
 
+NSString *const LuftSettingsChangedNotification = @"LuftSettingsChangedNotification";
+
 static NSString *const kGoodColor = @"luft.goodColor";
 static NSString *const kWarningColor = @"luft.warningColor";
 static NSString *const kBadColor = @"luft.badColor";
 static NSString *const kOnlyViewControllers = @"luft.onlyViewControllers";
 static NSString *const kLowerLimit = @"luft.lowerLimit";
 static NSString *const kUpperLimit = @"luft.upperLimit";
+
+@interface LuftSettings()
+- (void)postSettingsChangedNotification;
+@end
 
 @implementation LuftSettings
 
@@ -34,29 +40,35 @@ static NSString *const kUpperLimit = @"luft.upperLimit";
 
 - (void)setGoodColor:(NSColor *)color {
     [self _setColor:color forKey:kGoodColor];
+    [self postSettingsChangedNotification];
 }
 
 - (void)setWarningColor:(NSColor *)color {
     [self _setColor:color forKey:kWarningColor];
+    [self postSettingsChangedNotification];
 }
 
 - (void)setBadColor:(NSColor *)color {
     [self _setColor:color forKey:kBadColor];
+    [self postSettingsChangedNotification];
 }
 
 - (void)setOnlyViewControllers:(BOOL)value {
     [[NSUserDefaults standardUserDefaults] setBool:value forKey:kOnlyViewControllers];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [self postSettingsChangedNotification];
 }
 
 - (void)setLowerLimit:(NSUInteger)limit {
     [[NSUserDefaults standardUserDefaults] setInteger:limit forKey:kLowerLimit];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [self postSettingsChangedNotification];
 }
 
 - (void)setUpperLimit:(NSUInteger)limit {
     [[NSUserDefaults standardUserDefaults] setInteger:limit forKey:kUpperLimit];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [self postSettingsChangedNotification];
 }
 
 #pragma mark - Getters
@@ -89,6 +101,10 @@ static NSString *const kUpperLimit = @"luft.upperLimit";
 }
 
 #pragma mark - Private
+
+- (void)postSettingsChangedNotification {
+    [[NSNotificationCenter defaultCenter] postNotificationName:LuftSettingsChangedNotification object:nil];
+}
 
 - (void)_setColor:(NSColor *)color forKey:(NSString *)key {
     NSData *colorData = [NSArchiver archivedDataWithRootObject:color];

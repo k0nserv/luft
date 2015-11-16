@@ -20,6 +20,8 @@ typedef NS_ENUM(NSInteger, ViewControllerState) {
 };
 
 @interface IDESourceCodeEditor(LuftPrivate)
+- (void)addSettingsChangedObserver;
+- (void)removeSettingsChangedObeserver;
 - (void)updateUIWithSourceTextView:(DVTSourceTextView *)sourceTextView
                           document:(IDESourceCodeDocument *)document;
 - (ViewControllerState)determineViewControllerStateForLineCount:(NSInteger)lineCount;
@@ -38,21 +40,50 @@ typedef NS_ENUM(NSInteger, ViewControllerState) {
                    usingBlock:^(id<AspectInfo> aspectInfo,  id arg) {
                        [aspectInfo.instance handleTextChange];
                    }
-                   error:nil];
+                        error:nil];
 
     [self aspect_hookSelector:@selector(setScrollView:)
                   withOptions:AspectPositionAfter
                    usingBlock:^(id<AspectInfo> aspectInfo, DVTSourceTextView *textView) {
                        [aspectInfo.instance handleTextChange];
                    }
-                   error:nil];
+                        error:nil];
 
     [self aspect_hookSelector:@selector(setTextView:)
                   withOptions:AspectPositionAfter
                    usingBlock:^(id<AspectInfo> aspectInfo, DVTSourceTextView *textView) {
                        [aspectInfo.instance handleTextChange];
                    }
-                   error:nil];
+                        error:nil];
+    NSError *error;
+    [self aspect_hookSelector:@selector(viewDidAppear)
+                  withOptions:AspectPositionAfter
+                   usingBlock:^(id<AspectInfo> aspectInfo){
+                           [aspectInfo.instance addSettingsChangedObserver];
+                   }
+                        error:&error];
+    if (error) {
+        NSLog(@"%@", error);
+    }
+
+    error = nil;
+    [self aspect_hookSelector:@selector(viewDidDisappear)
+                  withOptions:AspectPositionAfter
+                   usingBlock:^(id<AspectInfo> aspectInfo){
+                       [aspectInfo.instance removeSettingsChangedObeserver];
+                   }
+                        error:&error];
+    if (error) {
+        NSLog(@"%@", error);
+    }
+}
+
+- (void)addSettingsChangedObserver {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextChange) name:LuftSettingsChangedNotification object:nil];
+}
+
+- (void)removeSettingsChangedObeserver {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:LuftSettingsChangedNotification object:nil];
 }
 
 - (void)handleTextChange {

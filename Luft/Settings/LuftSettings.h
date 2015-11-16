@@ -9,6 +9,8 @@
 #import <AppKit/AppKit.h>
 #import <Foundation/Foundation.h>
 
+extern NSString *const LuftSettingsChangedNotification;
+
 @interface LuftSettings : NSObject
 
 + (LuftSettings *)sharedSettings;
