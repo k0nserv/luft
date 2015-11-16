@@ -43,6 +43,7 @@ By default the following rules are used to determine the color of the gutter
 ## Known Issues
 
 + Having the same file open in the assistant editor will not correctly reflect changes made in the active editor  
++ Other Issues? Please open a github issue. 
 
 ## Screenshots
 
