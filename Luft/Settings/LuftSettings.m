@@ -22,7 +22,9 @@ static NSString *const kUpperLimit = @"luft.upperLimit";
     static LuftSettings *sharedSettings;
     dispatch_once(&once, ^ {
         sharedSettings = [[LuftSettings alloc] init];
-        NSDictionary *defaults = @{kOnlyViewControllers: @YES};
+        NSDictionary *defaults = @{kOnlyViewControllers: @YES,
+                                   kLowerLimit: @150,
+                                   kUpperLimit: @300};
         [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     });
     return sharedSettings;
@@ -66,7 +68,7 @@ static NSString *const kUpperLimit = @"luft.upperLimit";
 
 - (NSColor *)warningColor {
     NSColor *color =  [self _getColorForKey:kWarningColor];
-    return color ? color : [self _defaultGoodColor];
+    return color ? color : [self _defaultWarningColor];
 }
 
 - (NSColor *)badColor {
@@ -105,15 +107,15 @@ static NSString *const kUpperLimit = @"luft.upperLimit";
 
 
 - (NSColor *)_defaultGoodColor {
-    return [NSColor colorWithCalibratedRed:0.2 green:0.51 blue:0.0471 alpha:1.0];
+    return [NSColor colorWithCalibratedRed:0.2 green:0.51 blue:0.0471 alpha:0.5];
 }
 
 - (NSColor *)_defaultWarningColor {
-    return [NSColor colorWithCalibratedRed:0.49 green:0.51 blue:0.0471 alpha:1.0];
+    return [NSColor colorWithCalibratedRed:0.49 green:0.51 blue:0.0471 alpha:0.5];
 }
 
 - (NSColor *)_defaultBadColor {
-    return [NSColor colorWithCalibratedRed:0.51 green:0.0471 blue:0.0471 alpha:1.0];
+    return [NSColor colorWithCalibratedRed:0.51 green:0.0471 blue:0.0471 alpha:0.5];
 }
 
 @end
