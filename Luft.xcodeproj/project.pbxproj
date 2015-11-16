@@ -281,7 +281,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				INFOPLIST_FILE = Luft/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = org.hugotunius.Luft;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xcplugin;
@@ -297,7 +297,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				INFOPLIST_FILE = Luft/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = org.hugotunius.Luft;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xcplugin;
