@@ -7,22 +7,20 @@
 //
 
 #import "IDEApplicationController+Luft.h"
-#import "NSObject+Additions.h"
+#import "Aspects.h"
 #import "Luft.h"
 
 @implementation IDEApplicationController (Luft)
 
 + (void)luft_initialize {
-    if ([self methodForSelector:@selector(_updateEditorAndNavigateMenusIfNeeded)] == NULL) {
-        return;
-    }
-
-    [self luft_swizzleInstanceMethod:@selector(_updateEditorAndNavigateMenusIfNeeded) with:@selector(luft_updateEditorAndNavigateMenusIfNeeded)];
+    [self aspect_hookSelector:@selector(_updateEditorAndNavigateMenusIfNeeded)
+                  withOptions:AspectPositionAfter
+                   usingBlock:^(id<AspectInfo> aspectInfo) {
+        [aspectInfo.instance luft_updateEditorAndNavigateMenusIfNeeded];
+    } error:nil];
 }
 
 - (void)luft_updateEditorAndNavigateMenusIfNeeded{
-    [self luft_updateEditorAndNavigateMenusIfNeeded];
-
     NSMenu *menu = [[NSApplication sharedApplication] menu];
 
     NSMenuItem *editorMenuItem = [menu itemWithTitle:@"Editor"];
