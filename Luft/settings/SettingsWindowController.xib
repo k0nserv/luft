@@ -20,14 +20,14 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Luft Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
-            <rect key="contentRect" x="196" y="240" width="455" height="379"/>
+            <rect key="contentRect" x="196" y="240" width="475" height="379"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="455" height="379"/>
+                <rect key="frame" x="0.0" y="0.0" width="475" height="379"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="WFp-zj-eqN">
-                        <rect key="frame" x="60" y="83" width="44" height="24"/>
+                        <rect key="frame" x="60" y="73" width="44" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="BQf-B7-8cm"/>
                             <constraint firstAttribute="width" constant="44" id="eJC-9y-X56"/>
@@ -35,7 +35,7 @@
                         <color key="color" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </colorWell>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rI2-ss-xrb">
-                        <rect key="frame" x="110" y="126" width="100" height="17"/>
+                        <rect key="frame" x="110" y="116" width="100" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="bvN-cq-ezr"/>
                             <constraint firstAttribute="width" constant="96" id="sp7-8g-zjd"/>
@@ -47,7 +47,7 @@
                         </textFieldCell>
                     </textField>
                     <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="ekw-x2-kDB">
-                        <rect key="frame" x="60" y="122" width="44" height="24"/>
+                        <rect key="frame" x="60" y="112" width="44" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="44" id="Oy2-Cs-Hx6"/>
                             <constraint firstAttribute="height" constant="24" id="T9k-hv-9ri"/>
@@ -55,7 +55,7 @@
                         <color key="color" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </colorWell>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AkV-3R-VC4">
-                        <rect key="frame" x="110" y="86" width="118" height="17"/>
+                        <rect key="frame" x="110" y="76" width="118" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="33b-N8-oKm"/>
                             <constraint firstAttribute="width" constant="114" id="kwo-31-FzM"/>
@@ -67,7 +67,7 @@
                         </textFieldCell>
                     </textField>
                     <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="F29-gf-blc">
-                        <rect key="frame" x="60" y="163" width="335" height="5"/>
+                        <rect key="frame" x="60" y="153" width="355" height="5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="nZa-GL-Gg3"/>
                         </constraints>
@@ -76,7 +76,7 @@
                         <font key="titleFont" metaFont="system"/>
                     </box>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="xSQ-vb-Bn6">
-                        <rect key="frame" x="58" y="181" width="237" height="18"/>
+                        <rect key="frame" x="58" y="171" width="237" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="t0j-Jg-HXQ"/>
                         </constraints>
@@ -89,17 +89,17 @@
                         </connections>
                     </button>
                     <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="Uoi-Oh-3Ww">
-                        <rect key="frame" x="60" y="44" width="44" height="24"/>
+                        <rect key="frame" x="60" y="34" width="44" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="0Np-eh-t1h"/>
                             <constraint firstAttribute="width" constant="44" id="hul-PI-ipJ"/>
                         </constraints>
                         <color key="color" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </colorWell>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" preferredMaxLayoutWidth="335" translatesAutoresizingMaskIntoConstraints="NO" id="uX7-nR-ffH">
-                        <rect key="frame" x="58" y="281" width="339" height="68"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="335" translatesAutoresizingMaskIntoConstraints="NO" id="uX7-nR-ffH">
+                        <rect key="frame" x="58" y="279" width="359" height="70"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="60" id="oR2-GV-ZWl"/>
+                            <constraint firstAttribute="height" constant="70" id="oR2-GV-ZWl"/>
                         </constraints>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="dTZ-yj-7gJ">
                             <font key="font" metaFont="system"/>
@@ -109,7 +109,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2R0-cS-pkT">
-                        <rect key="frame" x="58" y="261" width="78" height="18"/>
+                        <rect key="frame" x="58" y="251" width="78" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="9ri-xp-veH"/>
                             <constraint firstAttribute="width" constant="74" id="iN7-J0-TyR"/>
@@ -121,7 +121,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uIc-J4-T6I">
-                        <rect key="frame" x="58" y="225" width="78" height="17"/>
+                        <rect key="frame" x="58" y="215" width="78" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="dqQ-cP-Zqj"/>
                             <constraint firstAttribute="width" constant="74" id="kWs-ir-JCu"/>
@@ -133,7 +133,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fPv-JF-1Cg">
-                        <rect key="frame" x="149" y="222" width="50" height="22"/>
+                        <rect key="frame" x="149" y="212" width="50" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="d8V-JU-5d5"/>
                             <constraint firstAttribute="height" constant="22" id="wxq-Wj-gQB"/>
@@ -146,7 +146,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zmJ-bT-nNf">
-                        <rect key="frame" x="110" y="46" width="85" height="17"/>
+                        <rect key="frame" x="110" y="36" width="85" height="17"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="81" id="5ts-t2-rS8"/>
                             <constraint firstAttribute="height" constant="17" id="HNm-3z-GHn"/>
@@ -158,7 +158,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y7J-FL-8jx">
-                        <rect key="frame" x="149" y="259" width="50" height="22"/>
+                        <rect key="frame" x="149" y="249" width="50" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="9Ij-1s-XRl"/>
                             <constraint firstAttribute="width" constant="50" id="V1m-MS-pwi"/>
@@ -202,7 +202,7 @@
                     <constraint firstItem="zmJ-bT-nNf" firstAttribute="leading" secondItem="Uoi-Oh-3Ww" secondAttribute="trailing" constant="8" id="zZn-07-byS"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="229.5" y="247.5"/>
+            <point key="canvasLocation" x="239.5" y="247.5"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="2jS-IQ-Gjb"/>
     </objects>

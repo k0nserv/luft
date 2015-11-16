@@ -15,9 +15,7 @@
 @interface SettingsWindowController () <NSTextFieldDelegate>
 
 @property (weak) IBOutlet NSTextField *lowerLimitTextField;
-@property (weak) IBOutlet NSStepper *lowerLimitStepper;
 @property (weak) IBOutlet NSTextField *upperLimitTextField;
-@property (weak) IBOutlet NSStepper *upperLimitStepper;
 
 @property (weak) IBOutlet NSButton *onlyViewControllersCheckBox;
 
