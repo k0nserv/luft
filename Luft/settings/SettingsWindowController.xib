@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9527.1" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9527.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SettingsWindowController">
@@ -21,7 +20,7 @@
         <window title="Luft Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="196" y="240" width="475" height="379"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="475" height="379"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -32,6 +31,7 @@
                             <constraint firstAttribute="height" constant="24" id="BQf-B7-8cm"/>
                             <constraint firstAttribute="width" constant="44" id="eJC-9y-X56"/>
                         </constraints>
+                        <animations/>
                         <color key="color" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </colorWell>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rI2-ss-xrb">
@@ -40,6 +40,7 @@
                             <constraint firstAttribute="height" constant="17" id="bvN-cq-ezr"/>
                             <constraint firstAttribute="width" constant="96" id="sp7-8g-zjd"/>
                         </constraints>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Good Color😎" id="m2v-Pb-Jlr">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -52,6 +53,7 @@
                             <constraint firstAttribute="width" constant="44" id="Oy2-Cs-Hx6"/>
                             <constraint firstAttribute="height" constant="24" id="T9k-hv-9ri"/>
                         </constraints>
+                        <animations/>
                         <color key="color" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </colorWell>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AkV-3R-VC4">
@@ -60,6 +62,7 @@
                             <constraint firstAttribute="height" constant="17" id="33b-N8-oKm"/>
                             <constraint firstAttribute="width" constant="114" id="kwo-31-FzM"/>
                         </constraints>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Warning Color😅" id="Oed-iM-yPe">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -71,6 +74,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="nZa-GL-Gg3"/>
                         </constraints>
+                        <animations/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <font key="titleFont" metaFont="system"/>
@@ -80,6 +84,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="t0j-Jg-HXQ"/>
                         </constraints>
+                        <animations/>
                         <buttonCell key="cell" type="check" title="Only show color in View Controllers" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="rYL-Bd-UxH">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -94,6 +99,7 @@
                             <constraint firstAttribute="height" constant="24" id="0Np-eh-t1h"/>
                             <constraint firstAttribute="width" constant="44" id="hul-PI-ipJ"/>
                         </constraints>
+                        <animations/>
                         <color key="color" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </colorWell>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="335" translatesAutoresizingMaskIntoConstraints="NO" id="uX7-nR-ffH">
@@ -101,6 +107,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="70" id="oR2-GV-ZWl"/>
                         </constraints>
+                        <animations/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="dTZ-yj-7gJ">
                             <font key="font" metaFont="system"/>
                             <string key="title">Files with less lines than Good limit will be colored in Good color, classes between Good and Bad limit in Warning color and all classes above Bad limit in Bad color </string>
@@ -114,6 +121,7 @@
                             <constraint firstAttribute="height" constant="18" id="9ri-xp-veH"/>
                             <constraint firstAttribute="width" constant="74" id="iN7-J0-TyR"/>
                         </constraints>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Good Limit" id="79x-sC-LNP">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -126,6 +134,7 @@
                             <constraint firstAttribute="height" constant="17" id="dqQ-cP-Zqj"/>
                             <constraint firstAttribute="width" constant="74" id="kWs-ir-JCu"/>
                         </constraints>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Bad Limit" id="bpn-NM-uqz">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -138,8 +147,12 @@
                             <constraint firstAttribute="width" constant="50" id="d8V-JU-5d5"/>
                             <constraint firstAttribute="height" constant="22" id="wxq-Wj-gQB"/>
                         </constraints>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="fvk-7N-THA">
-                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="1hD-Dy-Apb"/>
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" localizesFormat="NO" allowsFloats="NO" groupingSize="4" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="1hD-Dy-Apb">
+                                <real key="minimum" value="0.0"/>
+                                <real key="maximum" value="9999"/>
+                            </numberFormatter>
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -151,6 +164,7 @@
                             <constraint firstAttribute="width" constant="81" id="5ts-t2-rS8"/>
                             <constraint firstAttribute="height" constant="17" id="HNm-3z-GHn"/>
                         </constraints>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Bad Color😰" id="09l-Nu-qGq">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -163,8 +177,12 @@
                             <constraint firstAttribute="height" constant="22" id="9Ij-1s-XRl"/>
                             <constraint firstAttribute="width" constant="50" id="V1m-MS-pwi"/>
                         </constraints>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" placeholderString="" drawsBackground="YES" id="3rM-38-ico">
-                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="ybN-MM-YJd"/>
+                            <numberFormatter key="formatter" formatterBehavior="custom10_4" localizesFormat="NO" allowsFloats="NO" groupingSize="4" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="ybN-MM-YJd">
+                                <real key="minimum" value="0.0"/>
+                                <real key="maximum" value="9999"/>
+                            </numberFormatter>
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -201,6 +219,7 @@
                     <constraint firstItem="ekw-x2-kDB" firstAttribute="top" secondItem="F29-gf-blc" secondAttribute="bottom" constant="19" id="yFA-fp-xhX"/>
                     <constraint firstItem="zmJ-bT-nNf" firstAttribute="leading" secondItem="Uoi-Oh-3Ww" secondAttribute="trailing" constant="8" id="zZn-07-byS"/>
                 </constraints>
+                <animations/>
             </view>
             <point key="canvasLocation" x="239.5" y="247.5"/>
         </window>
