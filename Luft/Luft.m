@@ -9,12 +9,13 @@
 #import "Luft.h"
 
 #import "Aspects.h"
-#import "SettingsWindowController.h"
 #import <objc/runtime.h>
 
 #import "DVTSourceTextView.h"
+#import "IDEApplicationController+Luft.h"
 #import "IDESourceCodeDocument.h"
 #import "IDESourceCodeEditor+Luft.h"
+#import "SettingsWindowController.h"
 
 static BOOL debug = NO;
 
@@ -35,6 +36,15 @@ static NSString *const IDESourceCodeEditorDidFinishSetupNotification = @"IDESour
     return sharedPlugin;
 }
 
++ (Luft *)instance {
+    static Luft *_instance = nil;
+    static dispatch_once_t _once;
+    dispatch_once(&_once, ^{
+        _instance = [[Luft alloc] init];
+    });
+    return _instance;
+}
+
 - (id)initWithBundle:(NSBundle *)plugin {
     if (self = [super init]) {
         // reference to plugin's bundle, for resource access
@@ -49,6 +59,7 @@ static NSString *const IDESourceCodeEditorDidFinishSetupNotification = @"IDESour
                                                      name:IDESourceCodeEditorDidFinishSetupNotification
                                                    object:nil];
         [IDESourceCodeEditor luft_initialize];
+        [IDEApplicationController luft_initialize];
 
         if (debug) {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(traceNotifications:) name:nil object:nil];
@@ -83,42 +94,29 @@ static NSString *const IDESourceCodeEditorDidFinishSetupNotification = @"IDESour
     }
 }
 
-- (BOOL)isViewController:(NSString *)filename {
-    NSString *lowerCaseFilename = [filename lowercaseString];
-    BOOL isViewController = [lowerCaseFilename rangeOfString:@"viewcontroller"].location != NSNotFound;
-    BOOL isImplementationOrSwift = [lowerCaseFilename rangeOfString:@".m"].location != NSNotFound || [lowerCaseFilename rangeOfString:@".swift"].location != NSNotFound;
-    isViewController = isViewController && isImplementationOrSwift;
-    return isViewController;
-
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-+ (NSColor *)goodColor {
-    return [NSColor colorWithCalibratedRed: 0.2 green: 0.51 blue: 0.0471 alpha: 0.5];
-}
-
-+ (NSColor *)warningColor {
-    return [NSColor colorWithCalibratedRed: 0.49 green: 0.51 blue: 0.0471 alpha: 0.5];
-}
-
-+ (NSColor *)badColor {
-    return [NSColor colorWithCalibratedRed: 0.51 green: 0.0471 blue: 0.0471 alpha: 0.5];
-
-}
-
 #pragma mark - Settings
 
 - (void)addSettingMenu {
-    NSMenuItem *editMenuItem = [[NSApp mainMenu] itemWithTitle:@"Window"];
-    if (editMenuItem) {
-        NSMenuItem *newMenuItem = [[NSMenuItem alloc] initWithTitle:@"Luft💨" action:@selector(showSettings:) keyEquivalent:@""];
+    NSMenu *menu = [[NSApplication sharedApplication] menu];
+    NSMenuItem *editorMenuItem = [menu itemWithTitle:@"Editor"];
 
-        [newMenuItem setTarget:self];
-        [[editMenuItem submenu] addItem:newMenuItem];
-    }
+    [[editorMenuItem submenu] addItem:[NSMenuItem separatorItem]];
+    [[editorMenuItem submenu] addItem:[[self class] menuItem]];
+}
+
++ (NSMenuItem *)menuItem {
+    NSMenuItem *menuItem = [[NSMenuItem alloc] init];
+    menuItem.title = @"Luft";
+    NSMenu* subMenu = [[NSMenu alloc] initWithTitle:@"Luft"];
+    [menuItem setSubmenu:subMenu];
+
+    NSMenuItem *subMenuItem = [[NSMenuItem alloc] init];
+    subMenuItem.title = @"Preferences";
+    [subMenuItem setAction:@selector(showSettings:)];
+    [subMenuItem setTarget:[Luft instance]];
+    [subMenu addItem:subMenuItem];
+
+    return menuItem;
 }
 
 - (void)showSettings:(NSNotification *)notification {

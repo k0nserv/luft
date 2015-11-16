@@ -15,7 +15,7 @@ static Luft *sharedPlugin;
 @interface Luft : NSObject
 
 + (instancetype)sharedPlugin;
-
++ (NSMenuItem *)menuItem;
 
 - (id)initWithBundle:(NSBundle *)plugin;
 
