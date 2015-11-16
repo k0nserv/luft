@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		800383641BF9D4AE001D6EFC /* IDEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 800383631BF9D4AE001D6EFC /* IDEKit.framework */; };
+		801E76E91BF9267D009D842A /* IDEApplicationController+Luft.m in Sources */ = {isa = PBXBuildFile; fileRef = 801E76E81BF9267D009D842A /* IDEApplicationController+Luft.m */; };
+		8035907B1BF8CC740008ADBD /* SettingsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8035907A1BF8CC740008ADBD /* SettingsWindowController.m */; };
+		804313101BF8D2A00001E08D /* SettingsWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8043130F1BF8D2A00001E08D /* SettingsWindowController.xib */; };
+		804BD2CB1BF8DF1300C2DB21 /* LuftSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 804BD2CA1BF8DF1300C2DB21 /* LuftSettings.m */; };
+		D637E0AC1BED246B00A71C48 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D637E0A71BED246B00A71C48 /* Info.plist */; };
 		D637E0AD1BED246B00A71C48 /* Luft.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0A91BED246B00A71C48 /* Luft.m */; };
 		D637E0AE1BED246B00A71C48 /* NSObject_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0AB1BED246B00A71C48 /* NSObject_Extension.m */; };
 		D637E0B21BED247200A71C48 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0B11BED247200A71C48 /* Aspects.m */; };
@@ -17,6 +23,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		800383631BF9D4AE001D6EFC /* IDEKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IDEKit.framework; path = ../Frameworks/IDEKit.framework; sourceTree = DEVELOPER_DIR; };
+		801E76E61BF92193009D842A /* IDEApplicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEApplicationController.h; sourceTree = "<group>"; };
+		801E76E71BF9267D009D842A /* IDEApplicationController+Luft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDEApplicationController+Luft.h"; sourceTree = "<group>"; };
+		801E76E81BF9267D009D842A /* IDEApplicationController+Luft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDEApplicationController+Luft.m"; sourceTree = "<group>"; };
+		803590791BF8CC740008ADBD /* SettingsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsWindowController.h; path = Luft/Settings/SettingsWindowController.h; sourceTree = SOURCE_ROOT; };
+		8035907A1BF8CC740008ADBD /* SettingsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsWindowController.m; path = Luft/Settings/SettingsWindowController.m; sourceTree = SOURCE_ROOT; };
+		8043130F1BF8D2A00001E08D /* SettingsWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsWindowController.xib; sourceTree = "<group>"; };
+		804BD2C91BF8DF1300C2DB21 /* LuftSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LuftSettings.h; path = Luft/Settings/LuftSettings.h; sourceTree = SOURCE_ROOT; };
+		804BD2CA1BF8DF1300C2DB21 /* LuftSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LuftSettings.m; path = Luft/Settings/LuftSettings.m; sourceTree = SOURCE_ROOT; };
 		D637E0A71BED246B00A71C48 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D637E0A81BED246B00A71C48 /* Luft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Luft.h; sourceTree = "<group>"; };
 		D637E0A91BED246B00A71C48 /* Luft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Luft.m; sourceTree = "<group>"; };
@@ -38,7 +53,7 @@
 		D6ACBB0A1BF8CFD0004C8164 /* IDEEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEEditor.h; sourceTree = "<group>"; };
 		D6ACBB0B1BF8CFF9004C8164 /* IDEViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDEViewController.h; sourceTree = "<group>"; };
 		D6ACBB0C1BF8D022004C8164 /* DVTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTViewController.h; sourceTree = "<group>"; };
-		D6ACBB101BF8D2A4004C8164 /* IDESourceEditor */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = IDESourceEditor; path =     ../PlugIns/IDESourceEditor.ideplugin/Contents/MacOS/IDESourceEditor; sourceTree = DEVELOPER_DIR; };
+		D6ACBB101BF8D2A4004C8164 /* IDESourceEditor */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = IDESourceEditor; path = ../PlugIns/IDESourceEditor.ideplugin/Contents/MacOS/IDESourceEditor; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				800383641BF9D4AE001D6EFC /* IDEKit.framework in Frameworks */,
 				D691C0B91BEBDB1500FBE1B7 /* AppKit.framework in Frameworks */,
 				D691C0BB1BEBDB1500FBE1B7 /* Foundation.framework in Frameworks */,
 				D6ACBB111BF8D2A5004C8164 /* IDESourceEditor in Frameworks */,
@@ -55,6 +71,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		803590781BF8CBDC0008ADBD /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				804BD2C91BF8DF1300C2DB21 /* LuftSettings.h */,
+				804BD2CA1BF8DF1300C2DB21 /* LuftSettings.m */,
+				803590791BF8CC740008ADBD /* SettingsWindowController.h */,
+				8035907A1BF8CC740008ADBD /* SettingsWindowController.m */,
+				8043130F1BF8D2A00001E08D /* SettingsWindowController.xib */,
+			);
+			name = Settings;
+			path = settings;
+			sourceTree = "<group>";
+		};
 		D637E0A61BED246B00A71C48 /* Luft */ = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +94,9 @@
 				D637E0AB1BED246B00A71C48 /* NSObject_Extension.m */,
 				D6ACBB071BF8CED2004C8164 /* IDESourceCodeEditor+Luft.h */,
 				D6ACBB081BF8CED2004C8164 /* IDESourceCodeEditor+Luft.m */,
+				801E76E71BF9267D009D842A /* IDEApplicationController+Luft.h */,
+				801E76E81BF9267D009D842A /* IDEApplicationController+Luft.m */,
+				803590781BF8CBDC0008ADBD /* Settings */,
 			);
 			path = Luft;
 			sourceTree = "<group>";
@@ -100,6 +132,7 @@
 		D691C0B71BEBDB1500FBE1B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				800383631BF9D4AE001D6EFC /* IDEKit.framework */,
 				D6ACBB101BF8D2A4004C8164 /* IDESourceEditor */,
 				D691C0B81BEBDB1500FBE1B7 /* AppKit.framework */,
 				D691C0BA1BEBDB1500FBE1B7 /* Foundation.framework */,
@@ -119,6 +152,7 @@
 				D6ACBB011BF7C8AF004C8164 /* DVTSourceTextView.h */,
 				D6ACBB021BF7C8AF004C8164 /* IDESourceCodeDocument.h */,
 				D6ACBB031BF7C8AF004C8164 /* IDESourceCodeEditor.h */,
+				801E76E61BF92193009D842A /* IDEApplicationController.h */,
 			);
 			path = "Xcode Headers";
 			sourceTree = "<group>";
@@ -179,6 +213,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D637E0AC1BED246B00A71C48 /* Info.plist in Resources */,
+				804313101BF8D2A00001E08D /* SettingsWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,9 +226,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6ACBB091BF8CED2004C8164 /* IDESourceCodeEditor+Luft.m in Sources */,
+				804BD2CB1BF8DF1300C2DB21 /* LuftSettings.m in Sources */,
 				D637E0AD1BED246B00A71C48 /* Luft.m in Sources */,
 				D637E0AE1BED246B00A71C48 /* NSObject_Extension.m in Sources */,
+				8035907B1BF8CC740008ADBD /* SettingsWindowController.m in Sources */,
 				D637E0B21BED247200A71C48 /* Aspects.m in Sources */,
+				801E76E91BF9267D009D842A /* IDEApplicationController+Luft.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +317,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = "$(HOME)";
+				FRAMEWORK_SEARCH_PATHS = "$(SYSTEM_DEVELOPER_DIR)/../Frameworks";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				INFOPLIST_FILE = Luft/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
@@ -294,6 +334,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = "$(HOME)";
+				FRAMEWORK_SEARCH_PATHS = "$(SYSTEM_DEVELOPER_DIR)/../Frameworks";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				INFOPLIST_FILE = Luft/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";

@@ -10,6 +10,7 @@
 
 #import "DVTSourceTextView.h"
 #import "Aspects.h"
+#import "LuftSettings.h"
 #import <AppKit/AppKit.h>
 
 typedef NS_ENUM(NSInteger, ViewControllerState) {
@@ -136,9 +137,9 @@ typedef NS_ENUM(NSInteger, ViewControllerState) {
 }
 
 - (ViewControllerState)determineViewControllerStateForLineCount:(NSInteger)lineCount {
-    if (lineCount < 150) {
+    if (lineCount < [[LuftSettings sharedSettings] lowerLimit]) {
         return ViewControllerStateGood;
-    } else if (lineCount >= 150 && lineCount < 300) {
+    } else if (lineCount >= [[LuftSettings sharedSettings] lowerLimit] && lineCount < [[LuftSettings sharedSettings] upperLimit]) {
         return ViewControllerStateWarning;
     } else {
         return ViewControllerStateBad;
@@ -146,6 +147,10 @@ typedef NS_ENUM(NSInteger, ViewControllerState) {
 }
 
 - (BOOL)isViewController:(NSString *)filename {
+    if (![LuftSettings sharedSettings].onlyViewController) {
+        return YES;
+    }
+
     NSString *lowerCaseFilename = [filename lowercaseString];
     BOOL isViewController = [lowerCaseFilename rangeOfString:@"viewcontroller"].location != NSNotFound;
     BOOL isImplementationOrSwift = [lowerCaseFilename rangeOfString:@".m"].location != NSNotFound || [lowerCaseFilename rangeOfString:@".swift"].location != NSNotFound;
@@ -155,15 +160,15 @@ typedef NS_ENUM(NSInteger, ViewControllerState) {
 }
 
 + (NSColor *)goodColor {
-    return [NSColor colorWithCalibratedRed: 0.2 green: 0.51 blue: 0.0471 alpha: 0.5];
+    return [[LuftSettings sharedSettings] goodColor];
 }
 
 + (NSColor *)warningColor {
-    return [NSColor colorWithCalibratedRed: 0.49 green: 0.51 blue: 0.0471 alpha: 0.5];
+    return [[LuftSettings sharedSettings] warningColor];
 }
 
 + (NSColor *)badColor {
-    return [NSColor colorWithCalibratedRed: 0.51 green: 0.0471 blue: 0.0471 alpha: 0.5];
+    return [[LuftSettings sharedSettings] badColor];
     
 }
 
