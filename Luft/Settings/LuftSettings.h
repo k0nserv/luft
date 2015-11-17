@@ -15,6 +15,7 @@ extern NSString *const LuftSettingsChangedNotification;
 
 + (LuftSettings *)sharedSettings;
 
+- (void)resetDefaults;
 - (void)setGoodColor:(NSColor *)color;
 - (void)setWarningColor:(NSColor *)color;
 - (void)setBadColor:(NSColor *)color;
