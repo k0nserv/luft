@@ -32,14 +32,7 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
 
-    self.onlyViewControllersCheckBox.state = (NSCellStateValue)[[LuftSettings sharedSettings] onlyViewController];
-    self.goodColorPicker.color = [[LuftSettings sharedSettings] goodColor];
-    self.warningColorPicker.color = [[LuftSettings sharedSettings] warningColor];
-    self.badColorPicker.color = [[LuftSettings sharedSettings] badColor];
-    self.lowerLimitTextField.stringValue = [NSString stringWithFormat:@"%ld", [[LuftSettings sharedSettings] lowerLimit]];
-    self.upperLimitTextField.stringValue = [NSString stringWithFormat:@"%ld", [[LuftSettings sharedSettings] upperLimit]];
-    self.lowerLimitTextField.delegate = self;
-    self.upperLimitTextField.delegate = self;
+    [self setDefaults];
     [self.goodColorPicker addObserver:self forKeyPath:@"color" options:0 context:NULL];
     [self.warningColorPicker addObserver:self forKeyPath:@"color" options:0 context:NULL];
     [self.badColorPicker addObserver:self forKeyPath:@"color" options:0 context:NULL];
@@ -51,12 +44,26 @@
     [self.badColorPicker removeObserver:self forKeyPath:@"color"];
 }
 
-
+- (void)setDefaults {
+    self.onlyViewControllersCheckBox.state = (NSCellStateValue)[[LuftSettings sharedSettings] onlyViewController];
+    self.goodColorPicker.color = [[LuftSettings sharedSettings] goodColor];
+    self.warningColorPicker.color = [[LuftSettings sharedSettings] warningColor];
+    self.badColorPicker.color = [[LuftSettings sharedSettings] badColor];
+    self.lowerLimitTextField.stringValue = [NSString stringWithFormat:@"%ld", [[LuftSettings sharedSettings] lowerLimit]];
+    self.upperLimitTextField.stringValue = [NSString stringWithFormat:@"%ld", [[LuftSettings sharedSettings] upperLimit]];
+    self.lowerLimitTextField.delegate = self;
+    self.upperLimitTextField.delegate = self;
+}
 
 #pragma mark - Actions
 
 - (IBAction)didTapOnlyViewControllersCheckBox:(NSButton *)sender {
     [[LuftSettings sharedSettings] setOnlyViewControllers:sender.state];
+}
+
+- (IBAction)didTapResetDefaults:(NSButton *)sender {
+    [[LuftSettings sharedSettings] resetDefaults];
+    [self setDefaults];
 }
 
 #pragma mark - Setters

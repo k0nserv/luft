@@ -17,6 +17,9 @@ static NSString *const kOnlyViewControllers = @"luft.onlyViewControllers";
 static NSString *const kLowerLimit = @"luft.lowerLimit";
 static NSString *const kUpperLimit = @"luft.upperLimit";
 
+static NSUInteger const kDefaultLowerLimit = 150;
+static NSUInteger const kDefaultUpperLimit = 300;
+
 @interface LuftSettings()
 - (void)postSettingsChangedNotification;
 @end
@@ -29,14 +32,25 @@ static NSString *const kUpperLimit = @"luft.upperLimit";
     dispatch_once(&once, ^ {
         sharedSettings = [[LuftSettings alloc] init];
         NSDictionary *defaults = @{kOnlyViewControllers: @YES,
-                                   kLowerLimit: @150,
-                                   kUpperLimit: @300};
+                                   kLowerLimit: @(kDefaultLowerLimit),
+                                   kUpperLimit: @(kDefaultUpperLimit)};
         [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     });
     return sharedSettings;
 }
 
 #pragma mark - Setters
+
+- (void)resetDefaults {
+    [self _setColor:[self _defaultGoodColor] forKey:kGoodColor];
+    [self _setColor:[self _defaultWarningColor] forKey:kWarningColor];
+    [self _setColor:[self _defaultBadColor] forKey:kBadColor];
+    
+    [self setLowerLimit:kDefaultLowerLimit];
+    [self setUpperLimit:kDefaultUpperLimit];
+    [self setOnlyViewControllers:YES];
+    [self postSettingsChangedNotification];
+}
 
 - (void)setGoodColor:(NSColor *)color {
     [self _setColor:color forKey:kGoodColor];
