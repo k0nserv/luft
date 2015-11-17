@@ -20,7 +20,7 @@
         <window title="Luft Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="196" y="240" width="475" height="415"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="475" height="415"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -189,7 +189,7 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1yL-Xj-OL5">
-                        <rect key="frame" x="14" y="13" width="113" height="32"/>
+                        <rect key="frame" x="54" y="13" width="113" height="32"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Iki-BS-iiJ"/>
                             <constraint firstAttribute="width" constant="101" id="drD-fK-5e0"/>
@@ -212,7 +212,7 @@
                     <constraint firstItem="rI2-ss-xrb" firstAttribute="leading" secondItem="ekw-x2-kDB" secondAttribute="trailing" constant="8" id="5eg-sC-B4L"/>
                     <constraint firstItem="rI2-ss-xrb" firstAttribute="top" secondItem="F29-gf-blc" secondAttribute="bottom" constant="22" id="6OD-9v-wXj"/>
                     <constraint firstItem="WFp-zj-eqN" firstAttribute="top" secondItem="ekw-x2-kDB" secondAttribute="bottom" constant="15" id="99G-Dq-vV4"/>
-                    <constraint firstItem="1yL-Xj-OL5" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="CjC-Ej-O5d"/>
+                    <constraint firstItem="1yL-Xj-OL5" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="60" id="CjC-Ej-O5d"/>
                     <constraint firstItem="uX7-nR-ffH" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="60" id="J5v-dj-0Kf"/>
                     <constraint firstItem="fPv-JF-1Cg" firstAttribute="top" secondItem="y7J-FL-8jx" secondAttribute="bottom" constant="15" id="J9T-yz-Xpi"/>
                     <constraint firstItem="zmJ-bT-nNf" firstAttribute="top" secondItem="AkV-3R-VC4" secondAttribute="bottom" constant="23" id="KHQ-kj-2yD"/>
