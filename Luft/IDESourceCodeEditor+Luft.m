@@ -19,6 +19,8 @@ typedef NS_ENUM(NSInteger, ViewControllerState) {
     ViewControllerStateBad
 };
 
+static NSColor *defaultSidebarColor;
+
 @interface IDESourceCodeEditor(LuftPrivate)
 - (void)addSettingsChangedObserver;
 - (void)removeSettingsChangedObeserver;
@@ -27,6 +29,7 @@ typedef NS_ENUM(NSInteger, ViewControllerState) {
 - (ViewControllerState)determineViewControllerStateForLineCount:(NSInteger)lineCount;
 - (BOOL)isViewController:(NSString *__nonnull)filename;
 
++ (NSColor *)generateSidebarColorFromColor:(NSColor *)color;
 + (NSColor *)goodColor;
 + (NSColor *)warningColor;
 + (NSColor *)badColor;
@@ -148,23 +151,42 @@ typedef NS_ENUM(NSInteger, ViewControllerState) {
     if (![sideBarView respondsToSelector:setBackgroundColorSelector]) {
         return;
     }
-
+    
+    if (!defaultSidebarColor) {
+        SEL getBackgroundColorSelector = NSSelectorFromString(@"sidebarBackgroundColor");
+        
+        if (![sideBarView respondsToSelector:getBackgroundColorSelector]) {
+            return;
+        }
+        
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        defaultSidebarColor = [sideBarView performSelector:getBackgroundColorSelector];
+#pragma clang diagnostic pop
+    }
+
+    NSColor *newSidebarColor;
+    
     switch (state) {
         case ViewControllerStateGood:
-            [sideBarView performSelector:setBackgroundColorSelector withObject:[[self class] goodColor]];
+            newSidebarColor = [[self class] generateSidebarColorFromColor:[[self class] goodColor]];
             break;
         case ViewControllerStateWarning:
-            [sideBarView performSelector:setBackgroundColorSelector withObject:[[self class] warningColor]];
+            newSidebarColor = [[self class] generateSidebarColorFromColor:[[self class] warningColor]];
             break;
         case ViewControllerStateBad:
-            [sideBarView performSelector:setBackgroundColorSelector withObject:[[self class] badColor]];
+            newSidebarColor = [[self class] generateSidebarColorFromColor:[[self class] badColor]];
             break;
         default:
             break;
     }
+    
+    if (newSidebarColor) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [sideBarView performSelector:setBackgroundColorSelector withObject:newSidebarColor];
 #pragma clang diagnostic pop
+    }
 }
 
 - (ViewControllerState)determineViewControllerStateForLineCount:(NSInteger)lineCount {
@@ -188,6 +210,14 @@ typedef NS_ENUM(NSInteger, ViewControllerState) {
     isViewController = isViewController && isImplementationOrSwift;
 
     return isViewController;
+}
+
++ (NSColor *)generateSidebarColorFromColor:(NSColor *)color {
+    if ([[LuftSettings sharedSettings] blendWithSidebar]) {
+        return [defaultSidebarColor blendedColorWithFraction:[[LuftSettings sharedSettings] blendFactor] ofColor:color];
+    } else {
+        return color;
+    }
 }
 
 + (NSColor *)goodColor {

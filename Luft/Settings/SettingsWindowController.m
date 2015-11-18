@@ -18,6 +18,12 @@
 @property (weak) IBOutlet NSTextField *upperLimitTextField;
 
 @property (weak) IBOutlet NSButton *onlyViewControllersCheckBox;
+@property (weak) IBOutlet NSButton *blendWithSidebarCheckBox;
+
+
+@property (weak) IBOutlet NSTextField *blendFactorTextField;
+
+@property (weak) IBOutlet NSSlider *blendFactorSlider;
 
 @property (weak) IBOutlet NSColorWell *goodColorPicker;
 @property (weak) IBOutlet NSColorWell *warningColorPicker;
@@ -45,7 +51,10 @@
 }
 
 - (void)setDefaults {
+    BOOL blendingEnabled = [[LuftSettings sharedSettings] blendWithSidebar];
+    
     self.onlyViewControllersCheckBox.state = (NSCellStateValue)[[LuftSettings sharedSettings] onlyViewController];
+    self.blendWithSidebarCheckBox.state = (NSCellStateValue)blendingEnabled;
     self.goodColorPicker.color = [[LuftSettings sharedSettings] goodColor];
     self.warningColorPicker.color = [[LuftSettings sharedSettings] warningColor];
     self.badColorPicker.color = [[LuftSettings sharedSettings] badColor];
@@ -53,9 +62,24 @@
     self.upperLimitTextField.stringValue = [NSString stringWithFormat:@"%ld", [[LuftSettings sharedSettings] upperLimit]];
     self.lowerLimitTextField.delegate = self;
     self.upperLimitTextField.delegate = self;
+    self.blendFactorSlider.doubleValue = [[LuftSettings sharedSettings] blendFactor] * 100;
+    self.blendFactorSlider.enabled = blendingEnabled;
+    self.blendFactorTextField.enabled = blendingEnabled;
 }
 
 #pragma mark - Actions
+
+- (IBAction)didChangeBlendFactorSlider:(id)sender {
+    NSSlider *slider = sender;
+    [[LuftSettings sharedSettings] setBlendFactor:slider.doubleValue / 100];
+}
+
+- (IBAction)didTapBlendWithSidebar:(NSButton *)sender {
+    BOOL enabled = sender.state;
+    [[LuftSettings sharedSettings] setBlendWithSidebar:enabled];
+    self.blendFactorSlider.enabled = enabled;
+    self.blendFactorTextField.enabled = enabled;
+}
 
 - (IBAction)didTapOnlyViewControllersCheckBox:(NSButton *)sender {
     [[LuftSettings sharedSettings] setOnlyViewControllers:sender.state];

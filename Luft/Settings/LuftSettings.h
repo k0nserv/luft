@@ -20,6 +20,8 @@ extern NSString *const LuftSettingsChangedNotification;
 - (void)setWarningColor:(NSColor *)color;
 - (void)setBadColor:(NSColor *)color;
 - (void)setOnlyViewControllers:(BOOL)value;
+- (void)setBlendWithSidebar:(BOOL)value;
+- (void)setBlendFactor:(double)factor;
 - (void)setLowerLimit:(NSUInteger)limit;
 - (void)setUpperLimit:(NSUInteger)limit;
 
@@ -27,6 +29,8 @@ extern NSString *const LuftSettingsChangedNotification;
 - (NSColor *)warningColor;
 - (NSColor *)badColor;
 - (BOOL)onlyViewController;
+- (BOOL)blendWithSidebar;
+- (double)blendFactor;
 - (NSUInteger)lowerLimit;
 - (NSUInteger)upperLimit;
 
