@@ -62,7 +62,7 @@
     self.upperLimitTextField.stringValue = [NSString stringWithFormat:@"%ld", [[LuftSettings sharedSettings] upperLimit]];
     self.lowerLimitTextField.delegate = self;
     self.upperLimitTextField.delegate = self;
-    self.blendFactorSlider.doubleValue = [[LuftSettings sharedSettings] blendFactor] * 100;
+    self.blendFactorSlider.floatValue = [[LuftSettings sharedSettings] blendFactor] * 100;
     self.blendFactorSlider.enabled = blendingEnabled;
     self.blendFactorTextField.enabled = blendingEnabled;
 }
@@ -71,7 +71,7 @@
 
 - (IBAction)didChangeBlendFactorSlider:(id)sender {
     NSSlider *slider = sender;
-    [[LuftSettings sharedSettings] setBlendFactor:slider.doubleValue / 100];
+    [[LuftSettings sharedSettings] setBlendFactor:slider.floatValue / 100];
 }
 
 - (IBAction)didTapBlendWithSidebar:(NSButton *)sender {

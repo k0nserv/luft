@@ -21,7 +21,7 @@ static NSString *const kUpperLimit = @"luft.upperLimit";
 
 static NSUInteger const kDefaultLowerLimit = 150;
 static NSUInteger const kDefaultUpperLimit = 300;
-static double const kDefaultBlendFactor = 0.25;
+static CGFloat const kDefaultBlendFactor = 0.25f;
 
 @interface LuftSettings()
 - (void)postSettingsChangedNotification;
@@ -86,8 +86,8 @@ static double const kDefaultBlendFactor = 0.25;
     [self postSettingsChangedNotification];
 }
 
-- (void)setBlendFactor:(double)factor {
-    [[NSUserDefaults standardUserDefaults] setDouble:factor forKey:kBlendFactor];
+- (void)setBlendFactor:(CGFloat)factor {
+    [[NSUserDefaults standardUserDefaults] setFloat:factor forKey:kBlendFactor];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self postSettingsChangedNotification];
 }
@@ -129,8 +129,8 @@ static double const kDefaultBlendFactor = 0.25;
     return [[NSUserDefaults standardUserDefaults] boolForKey:kBlendWithSidebar];
 }
 
-- (double)blendFactor {
-    return [[NSUserDefaults standardUserDefaults] doubleForKey:kBlendFactor];
+- (CGFloat)blendFactor {
+    return [[NSUserDefaults standardUserDefaults] floatForKey:kBlendFactor];
 }
 
 - (NSUInteger)lowerLimit {
