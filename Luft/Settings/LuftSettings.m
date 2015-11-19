@@ -164,15 +164,15 @@ static double const kDefaultBlendFactor = 0.25;
 
 
 - (NSColor *)_defaultGoodColor {
-    return [NSColor colorWithCalibratedRed:0.2 green:0.51 blue:0.0471 alpha:1];
+    return [NSColor colorWithCalibratedRed:0 green:0.78 blue:0 alpha:1];
 }
 
 - (NSColor *)_defaultWarningColor {
-    return [NSColor colorWithCalibratedRed:0.49 green:0.51 blue:0.0471 alpha:1];
+    return [NSColor colorWithCalibratedRed:1 green:1 blue:0 alpha:1];
 }
 
 - (NSColor *)_defaultBadColor {
-    return [NSColor colorWithCalibratedRed:0.51 green:0.0471 blue:0.0471 alpha:1];
+    return [NSColor colorWithCalibratedRed:1 green:0 blue:0 alpha:1];
 }
 
 @end
