@@ -24,6 +24,7 @@ static NSUInteger const kDefaultUpperLimit = 300;
 static CGFloat const kDefaultBlendFactor = 0.25f;
 
 @interface LuftSettings()
+- (void)configureSettings;
 - (void)postSettingsChangedNotification;
 @end
 
@@ -34,12 +35,7 @@ static CGFloat const kDefaultBlendFactor = 0.25f;
     static LuftSettings *sharedSettings;
     dispatch_once(&once, ^ {
         sharedSettings = [[LuftSettings alloc] init];
-        NSDictionary *defaults = @{kOnlyViewControllers: @YES,
-                                   kBlendWithSidebar: @YES,
-                                   kBlendFactor: @(kDefaultBlendFactor),
-                                   kLowerLimit: @(kDefaultLowerLimit),
-                                   kUpperLimit: @(kDefaultUpperLimit)};
-        [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+        [sharedSettings configureSettings];
     });
     return sharedSettings;
 }
@@ -142,6 +138,25 @@ static CGFloat const kDefaultBlendFactor = 0.25f;
 }
 
 #pragma mark - Private
+
+- (void)configureSettings {
+    BOOL colorKeyPresent = [[NSUserDefaults standardUserDefaults] objectForKey:kGoodColor] != nil;
+    BOOL blendKeyPresent = [[NSUserDefaults standardUserDefaults] objectForKey:kBlendWithSidebar] != nil;
+    
+    // Disable blending when upgrading from a version that didn't have blending support
+    BOOL disableBlending =  colorKeyPresent && !blendKeyPresent;
+    
+    NSDictionary *defaults = @{kOnlyViewControllers: @YES,
+                               kBlendWithSidebar: @YES,
+                               kBlendFactor: @(kDefaultBlendFactor),
+                               kLowerLimit: @(kDefaultLowerLimit),
+                               kUpperLimit: @(kDefaultUpperLimit)};
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+    
+    if (disableBlending && [self blendWithSidebar]) {
+        [self setBlendWithSidebar:NO];
+    }
+}
 
 - (void)postSettingsChangedNotification {
     [[NSNotificationCenter defaultCenter] postNotificationName:LuftSettingsChangedNotification object:nil];
