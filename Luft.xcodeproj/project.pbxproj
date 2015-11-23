@@ -12,6 +12,7 @@
 		8035907B1BF8CC740008ADBD /* SettingsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8035907A1BF8CC740008ADBD /* SettingsWindowController.m */; };
 		804313101BF8D2A00001E08D /* SettingsWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8043130F1BF8D2A00001E08D /* SettingsWindowController.xib */; };
 		804BD2CB1BF8DF1300C2DB21 /* LuftSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 804BD2CA1BF8DF1300C2DB21 /* LuftSettings.m */; };
+		AEDCE5C71BFCAED900A6BF3B /* SettingsTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AEDCE5C61BFCAED900A6BF3B /* SettingsTextField.m */; };
 		D637E0AC1BED246B00A71C48 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D637E0A71BED246B00A71C48 /* Info.plist */; };
 		D637E0AD1BED246B00A71C48 /* Luft.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0A91BED246B00A71C48 /* Luft.m */; };
 		D637E0AE1BED246B00A71C48 /* NSObject_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D637E0AB1BED246B00A71C48 /* NSObject_Extension.m */; };
@@ -32,6 +33,8 @@
 		8043130F1BF8D2A00001E08D /* SettingsWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsWindowController.xib; sourceTree = "<group>"; };
 		804BD2C91BF8DF1300C2DB21 /* LuftSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LuftSettings.h; path = Luft/Settings/LuftSettings.h; sourceTree = SOURCE_ROOT; };
 		804BD2CA1BF8DF1300C2DB21 /* LuftSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LuftSettings.m; path = Luft/Settings/LuftSettings.m; sourceTree = SOURCE_ROOT; };
+		AEDCE5C51BFCAED900A6BF3B /* SettingsTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTextField.h; path = Luft/Settings/SettingsTextField.h; sourceTree = SOURCE_ROOT; };
+		AEDCE5C61BFCAED900A6BF3B /* SettingsTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTextField.m; path = Luft/Settings/SettingsTextField.m; sourceTree = SOURCE_ROOT; };
 		D637E0A71BED246B00A71C48 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D637E0A81BED246B00A71C48 /* Luft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Luft.h; sourceTree = "<group>"; };
 		D637E0A91BED246B00A71C48 /* Luft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Luft.m; sourceTree = "<group>"; };
@@ -76,6 +79,8 @@
 			children = (
 				804BD2C91BF8DF1300C2DB21 /* LuftSettings.h */,
 				804BD2CA1BF8DF1300C2DB21 /* LuftSettings.m */,
+				AEDCE5C51BFCAED900A6BF3B /* SettingsTextField.h */,
+				AEDCE5C61BFCAED900A6BF3B /* SettingsTextField.m */,
 				803590791BF8CC740008ADBD /* SettingsWindowController.h */,
 				8035907A1BF8CC740008ADBD /* SettingsWindowController.m */,
 				8043130F1BF8D2A00001E08D /* SettingsWindowController.xib */,
@@ -225,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEDCE5C71BFCAED900A6BF3B /* SettingsTextField.m in Sources */,
 				D6ACBB091BF8CED2004C8164 /* IDESourceCodeEditor+Luft.m in Sources */,
 				804BD2CB1BF8DF1300C2DB21 /* LuftSettings.m in Sources */,
 				D637E0AD1BED246B00A71C48 /* Luft.m in Sources */,

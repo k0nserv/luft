@@ -14,13 +14,17 @@ static NSString *const kGoodColor = @"luft.goodColor";
 static NSString *const kWarningColor = @"luft.warningColor";
 static NSString *const kBadColor = @"luft.badColor";
 static NSString *const kOnlyViewControllers = @"luft.onlyViewControllers";
+static NSString *const kBlendWithSidebar = @"luft.blendWithSidebar";
+static NSString *const kBlendFactor = @"luft.blendFactor";
 static NSString *const kLowerLimit = @"luft.lowerLimit";
 static NSString *const kUpperLimit = @"luft.upperLimit";
 
 static NSUInteger const kDefaultLowerLimit = 150;
 static NSUInteger const kDefaultUpperLimit = 300;
+static CGFloat const kDefaultBlendFactor = 0.25f;
 
 @interface LuftSettings()
+- (void)configureSettings;
 - (void)postSettingsChangedNotification;
 @end
 
@@ -31,10 +35,7 @@ static NSUInteger const kDefaultUpperLimit = 300;
     static LuftSettings *sharedSettings;
     dispatch_once(&once, ^ {
         sharedSettings = [[LuftSettings alloc] init];
-        NSDictionary *defaults = @{kOnlyViewControllers: @YES,
-                                   kLowerLimit: @(kDefaultLowerLimit),
-                                   kUpperLimit: @(kDefaultUpperLimit)};
-        [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+        [sharedSettings configureSettings];
     });
     return sharedSettings;
 }
@@ -48,7 +49,9 @@ static NSUInteger const kDefaultUpperLimit = 300;
     
     [self setLowerLimit:kDefaultLowerLimit];
     [self setUpperLimit:kDefaultUpperLimit];
+    [self setBlendFactor:kDefaultBlendFactor];
     [self setOnlyViewControllers:YES];
+    [self setBlendWithSidebar:YES];
     [self postSettingsChangedNotification];
 }
 
@@ -69,6 +72,18 @@ static NSUInteger const kDefaultUpperLimit = 300;
 
 - (void)setOnlyViewControllers:(BOOL)value {
     [[NSUserDefaults standardUserDefaults] setBool:value forKey:kOnlyViewControllers];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self postSettingsChangedNotification];
+}
+
+- (void)setBlendWithSidebar:(BOOL)value {
+    [[NSUserDefaults standardUserDefaults] setBool:value forKey:kBlendWithSidebar];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self postSettingsChangedNotification];
+}
+
+- (void)setBlendFactor:(CGFloat)factor {
+    [[NSUserDefaults standardUserDefaults] setFloat:factor forKey:kBlendFactor];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self postSettingsChangedNotification];
 }
@@ -106,6 +121,14 @@ static NSUInteger const kDefaultUpperLimit = 300;
     return [[NSUserDefaults standardUserDefaults] boolForKey:kOnlyViewControllers];
 }
 
+- (BOOL)blendWithSidebar {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kBlendWithSidebar];
+}
+
+- (CGFloat)blendFactor {
+    return [[NSUserDefaults standardUserDefaults] floatForKey:kBlendFactor];
+}
+
 - (NSUInteger)lowerLimit {
     return [[NSUserDefaults standardUserDefaults] integerForKey:kLowerLimit];
 }
@@ -115,6 +138,25 @@ static NSUInteger const kDefaultUpperLimit = 300;
 }
 
 #pragma mark - Private
+
+- (void)configureSettings {
+    BOOL colorKeyPresent = [[NSUserDefaults standardUserDefaults] objectForKey:kGoodColor] != nil;
+    BOOL blendKeyPresent = [[NSUserDefaults standardUserDefaults] objectForKey:kBlendWithSidebar] != nil;
+    
+    // Disable blending when upgrading from a version that didn't have blending support
+    BOOL disableBlending =  colorKeyPresent && !blendKeyPresent;
+    
+    NSDictionary *defaults = @{kOnlyViewControllers: @YES,
+                               kBlendWithSidebar: @YES,
+                               kBlendFactor: @(kDefaultBlendFactor),
+                               kLowerLimit: @(kDefaultLowerLimit),
+                               kUpperLimit: @(kDefaultUpperLimit)};
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+    
+    if (disableBlending && [self blendWithSidebar]) {
+        [self setBlendWithSidebar:NO];
+    }
+}
 
 - (void)postSettingsChangedNotification {
     [[NSNotificationCenter defaultCenter] postNotificationName:LuftSettingsChangedNotification object:nil];
@@ -137,15 +179,15 @@ static NSUInteger const kDefaultUpperLimit = 300;
 
 
 - (NSColor *)_defaultGoodColor {
-    return [NSColor colorWithCalibratedRed:0.2 green:0.51 blue:0.0471 alpha:0.5];
+    return [NSColor colorWithCalibratedRed:0 green:0.78 blue:0 alpha:1];
 }
 
 - (NSColor *)_defaultWarningColor {
-    return [NSColor colorWithCalibratedRed:0.49 green:0.51 blue:0.0471 alpha:0.5];
+    return [NSColor colorWithCalibratedRed:1 green:1 blue:0 alpha:1];
 }
 
 - (NSColor *)_defaultBadColor {
-    return [NSColor colorWithCalibratedRed:0.51 green:0.0471 blue:0.0471 alpha:0.5];
+    return [NSColor colorWithCalibratedRed:1 green:0 blue:0 alpha:1];
 }
 
 @end
