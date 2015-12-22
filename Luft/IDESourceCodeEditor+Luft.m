@@ -203,13 +203,18 @@ static NSColor *defaultSidebarColor;
     if (![LuftSettings sharedSettings].onlyViewController) {
         return YES;
     }
-
-    NSString *lowerCaseFilename = [filename lowercaseString];
-    BOOL isViewController = [lowerCaseFilename rangeOfString:@"viewcontroller"].location != NSNotFound;
-    BOOL isImplementationOrSwift = [lowerCaseFilename rangeOfString:@".m"].location != NSNotFound || [lowerCaseFilename rangeOfString:@".swift"].location != NSNotFound;
-    isViewController = isViewController && isImplementationOrSwift;
-
-    return isViewController;
+    
+    // The regex excludes:
+    // - Categories (checks for "+" in the name)
+    // - Files with extension other than "m" or "swift"
+    // - Files that don't end in "ViewController"
+    
+    NSError *error;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^[^\\+]*ViewController\\.(m|swift)$"
+                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                             error:&error];
+    
+    return !error && [regex firstMatchInString:filename options:0 range:NSMakeRange(0, filename.length)] != nil;
 }
 
 + (NSColor *)generateSidebarColorFromColor:(NSColor *)color {
