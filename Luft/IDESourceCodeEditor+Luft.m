@@ -38,30 +38,30 @@ static NSColor *defaultSidebarColor;
 @implementation IDESourceCodeEditor (Luft)
 
 + (void)luft_initialize {
-    [self aspect_hookSelector:@selector(textDidChange:)
+    [self luft_aspect_hookSelector:@selector(textDidChange:)
                   withOptions:AspectPositionAfter
-                   usingBlock:^(id<AspectInfo> aspectInfo,  id arg) {
+                   usingBlock:^(id<Luft_AspectInfo> aspectInfo,  id arg) {
                        [aspectInfo.instance handleTextChange];
                    }
                         error:nil];
 
-    [self aspect_hookSelector:@selector(setScrollView:)
+    [self luft_aspect_hookSelector:@selector(setScrollView:)
                   withOptions:AspectPositionAfter
-                   usingBlock:^(id<AspectInfo> aspectInfo, DVTSourceTextView *textView) {
+                   usingBlock:^(id<Luft_AspectInfo> aspectInfo, DVTSourceTextView *textView) {
                        [aspectInfo.instance handleTextChange];
                    }
                         error:nil];
 
-    [self aspect_hookSelector:@selector(setTextView:)
+    [self luft_aspect_hookSelector:@selector(setTextView:)
                   withOptions:AspectPositionAfter
-                   usingBlock:^(id<AspectInfo> aspectInfo, DVTSourceTextView *textView) {
+                   usingBlock:^(id<Luft_AspectInfo> aspectInfo, DVTSourceTextView *textView) {
                        [aspectInfo.instance handleTextChange];
                    }
                         error:nil];
     NSError *error;
-    [self aspect_hookSelector:@selector(viewDidAppear)
+    [self luft_aspect_hookSelector:@selector(viewDidAppear)
                   withOptions:AspectPositionAfter
-                   usingBlock:^(id<AspectInfo> aspectInfo){
+                   usingBlock:^(id<Luft_AspectInfo> aspectInfo){
                            [aspectInfo.instance addSettingsChangedObserver];
                    }
                         error:&error];
@@ -70,9 +70,9 @@ static NSColor *defaultSidebarColor;
     }
 
     error = nil;
-    [self aspect_hookSelector:@selector(viewDidDisappear)
+    [self luft_aspect_hookSelector:@selector(viewDidDisappear)
                   withOptions:AspectPositionAfter
-                   usingBlock:^(id<AspectInfo> aspectInfo){
+                   usingBlock:^(id<Luft_AspectInfo> aspectInfo){
                        [aspectInfo.instance removeSettingsChangedObeserver];
                    }
                         error:&error];

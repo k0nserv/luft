@@ -13,9 +13,9 @@
 @implementation IDEApplicationController (Luft)
 
 + (void)luft_initialize {
-    [self aspect_hookSelector:@selector(_updateEditorAndNavigateMenusIfNeeded)
+    [self luft_aspect_hookSelector:@selector(_updateEditorAndNavigateMenusIfNeeded)
                   withOptions:AspectPositionAfter
-                   usingBlock:^(id<AspectInfo> aspectInfo) {
+                   usingBlock:^(id<Luft_AspectInfo> aspectInfo) {
         [aspectInfo.instance luft_updateEditorAndNavigateMenusIfNeeded];
     } error:nil];
 }

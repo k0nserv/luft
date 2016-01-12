@@ -37,7 +37,7 @@ typedef struct _AspectBlock {
 	// imported variables
 } *AspectBlockRef;
 
-@interface AspectInfo : NSObject <AspectInfo>
+@interface AspectInfo : NSObject <Luft_AspectInfo>
 - (id)initWithInstance:(__unsafe_unretained id)instance invocation:(NSInvocation *)invocation;
 @property (nonatomic, unsafe_unretained, readonly) id instance;
 @property (nonatomic, strong, readonly) NSArray *arguments;
@@ -47,7 +47,7 @@ typedef struct _AspectBlock {
 // Tracks a single aspect.
 @interface AspectIdentifier : NSObject
 + (instancetype)identifierWithSelector:(SEL)selector object:(id)object options:(AspectOptions)options block:(id)block error:(NSError **)error;
-- (BOOL)invokeWithInfo:(id<AspectInfo>)info;
+- (BOOL)invokeWithInfo:(id<Luft_AspectInfo>)info;
 @property (nonatomic, assign) SEL selector;
 @property (nonatomic, strong) id block;
 @property (nonatomic, strong) NSMethodSignature *blockSignature;
@@ -96,7 +96,7 @@ static NSString *const AspectsMessagePrefix = @"aspects_";
 ///////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Public Aspects API
 
-+ (id<AspectToken>)aspect_hookSelector:(SEL)selector
++ (id<Luft_AspectToken>)luft_aspect_hookSelector:(SEL)selector
                       withOptions:(AspectOptions)options
                        usingBlock:(id)block
                             error:(NSError **)error {
@@ -104,7 +104,7 @@ static NSString *const AspectsMessagePrefix = @"aspects_";
 }
 
 /// @return A token which allows to later deregister the aspect.
-- (id<AspectToken>)aspect_hookSelector:(SEL)selector
+- (id<Luft_AspectToken>)luft_aspect_hookSelector:(SEL)selector
                       withOptions:(AspectOptions)options
                        usingBlock:(id)block
                             error:(NSError **)error {
@@ -827,7 +827,7 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
     return identifier;
 }
 
-- (BOOL)invokeWithInfo:(id<AspectInfo>)info {
+- (BOOL)invokeWithInfo:(id<Luft_AspectInfo>)info {
     NSInvocation *blockInvocation = [NSInvocation invocationWithMethodSignature:self.blockSignature];
     NSInvocation *originalInvocation = info.originalInvocation;
     NSUInteger numberOfArguments = self.blockSignature.numberOfArguments;
