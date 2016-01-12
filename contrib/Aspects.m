@@ -37,7 +37,7 @@ typedef struct _AspectBlock {
 	// imported variables
 } *AspectBlockRef;
 
-@interface AspectInfo : NSObject <Luft_AspectInfo>
+@interface Luft_AspectInfo : NSObject <Luft_AspectInfo>
 - (id)initWithInstance:(__unsafe_unretained id)instance invocation:(NSInvocation *)invocation;
 @property (nonatomic, unsafe_unretained, readonly) id instance;
 @property (nonatomic, strong, readonly) NSArray *arguments;
@@ -45,7 +45,7 @@ typedef struct _AspectBlock {
 @end
 
 // Tracks a single aspect.
-@interface AspectIdentifier : NSObject
+@interface Luft_AspectIdentifier : NSObject
 + (instancetype)identifierWithSelector:(SEL)selector object:(id)object options:(AspectOptions)options block:(id)block error:(NSError **)error;
 - (BOOL)invokeWithInfo:(id<Luft_AspectInfo>)info;
 @property (nonatomic, assign) SEL selector;
@@ -56,8 +56,8 @@ typedef struct _AspectBlock {
 @end
 
 // Tracks all aspects for an object/class.
-@interface AspectsContainer : NSObject
-- (void)addAspect:(AspectIdentifier *)aspect withOptions:(AspectOptions)injectPosition;
+@interface Luft_AspectsContainer : NSObject
+- (void)addAspect:(Luft_AspectIdentifier *)aspect withOptions:(AspectOptions)injectPosition;
 - (BOOL)removeAspect:(id)aspect;
 - (BOOL)hasAspects;
 @property (atomic, copy) NSArray *beforeAspects;
@@ -65,14 +65,14 @@ typedef struct _AspectBlock {
 @property (atomic, copy) NSArray *afterAspects;
 @end
 
-@interface AspectTracker : NSObject
+@interface Luft_AspectTracker : NSObject
 - (id)initWithTrackedClass:(Class)trackedClass;
 @property (nonatomic, strong) Class trackedClass;
 @property (nonatomic, readonly) NSString *trackedClassName;
 @property (nonatomic, strong) NSMutableSet *selectorNames;
 @property (nonatomic, strong) NSMutableDictionary *selectorNamesToSubclassTrackers;
-- (void)addSubclassTracker:(AspectTracker *)subclassTracker hookingSelectorName:(NSString *)selectorName;
-- (void)removeSubclassTracker:(AspectTracker *)subclassTracker hookingSelectorName:(NSString *)selectorName;
+- (void)addSubclassTracker:(Luft_AspectTracker *)subclassTracker hookingSelectorName:(NSString *)selectorName;
+- (void)removeSubclassTracker:(Luft_AspectTracker *)subclassTracker hookingSelectorName:(NSString *)selectorName;
 - (BOOL)subclassHasHookedSelectorName:(NSString *)selectorName;
 - (NSSet *)subclassTrackersHookingSelectorName:(NSString *)selectorName;
 @end
@@ -119,11 +119,11 @@ static id aspect_add(id self, SEL selector, AspectOptions options, id block, NSE
     NSCParameterAssert(selector);
     NSCParameterAssert(block);
 
-    __block AspectIdentifier *identifier = nil;
+    __block Luft_AspectIdentifier *identifier = nil;
     aspect_performLocked(^{
         if (aspect_isSelectorAllowedAndTrack(self, selector, options, error)) {
-            AspectsContainer *aspectContainer = aspect_getContainerForObject(self, selector);
-            identifier = [AspectIdentifier identifierWithSelector:selector object:self options:options block:block error:error];
+            Luft_AspectsContainer *aspectContainer = aspect_getContainerForObject(self, selector);
+            identifier = [Luft_AspectIdentifier identifierWithSelector:selector object:self options:options block:block error:error];
             if (identifier) {
                 [aspectContainer addAspect:identifier withOptions:options];
 
@@ -135,14 +135,14 @@ static id aspect_add(id self, SEL selector, AspectOptions options, id block, NSE
     return identifier;
 }
 
-static BOOL aspect_remove(AspectIdentifier *aspect, NSError **error) {
-    NSCAssert([aspect isKindOfClass:AspectIdentifier.class], @"Must have correct type.");
+static BOOL aspect_remove(Luft_AspectIdentifier *aspect, NSError **error) {
+    NSCAssert([aspect isKindOfClass:Luft_AspectIdentifier.class], @"Must have correct type.");
 
     __block BOOL success = NO;
     aspect_performLocked(^{
         id self = aspect.object; // strongify
         if (self) {
-            AspectsContainer *aspectContainer = aspect_getContainerForObject(self, aspect.selector);
+            Luft_AspectsContainer *aspectContainer = aspect_getContainerForObject(self, aspect.selector);
             success = [aspectContainer removeAspect:aspect];
 
             aspect_cleanupHookedClassAndSelector(self, aspect.selector);
@@ -317,7 +317,7 @@ static void aspect_cleanupHookedClassAndSelector(NSObject *self, SEL selector) {
     aspect_deregisterTrackedSelector(self, selector);
 
     // Get the aspect container and check if there are any hooks remaining. Clean up if there are not.
-    AspectsContainer *container = aspect_getContainerForObject(self, selector);
+    Luft_AspectsContainer *container = aspect_getContainerForObject(self, selector);
     if (!container.hasAspects) {
         // Destroy the container
         aspect_destroyContainerForObject(self, selector);
@@ -463,7 +463,7 @@ static void aspect_undoSwizzleClassInPlace(Class klass) {
 
 // This is a macro so we get a cleaner stack trace.
 #define aspect_invoke(aspects, info) \
-for (AspectIdentifier *aspect in aspects) {\
+for (Luft_AspectIdentifier *aspect in aspects) {\
     [aspect invokeWithInfo:info];\
     if (aspect.options & AspectOptionAutomaticRemoval) { \
         aspectsToRemove = [aspectsToRemove?:@[] arrayByAddingObject:aspect]; \
@@ -477,9 +477,9 @@ static void __ASPECTS_ARE_BEING_CALLED__(__unsafe_unretained NSObject *self, SEL
     SEL originalSelector = invocation.selector;
 	SEL aliasSelector = aspect_aliasForSelector(invocation.selector);
     invocation.selector = aliasSelector;
-    AspectsContainer *objectContainer = objc_getAssociatedObject(self, aliasSelector);
-    AspectsContainer *classContainer = aspect_getContainerForClass(object_getClass(self), aliasSelector);
-    AspectInfo *info = [[AspectInfo alloc] initWithInstance:self invocation:invocation];
+    Luft_AspectsContainer *objectContainer = objc_getAssociatedObject(self, aliasSelector);
+    Luft_AspectsContainer *classContainer = aspect_getContainerForClass(object_getClass(self), aliasSelector);
+    Luft_AspectInfo *info = [[Luft_AspectInfo alloc] initWithInstance:self invocation:invocation];
     NSArray *aspectsToRemove = nil;
 
     // Before hooks.
@@ -525,20 +525,20 @@ static void __ASPECTS_ARE_BEING_CALLED__(__unsafe_unretained NSObject *self, SEL
 #pragma mark - Aspect Container Management
 
 // Loads or creates the aspect container.
-static AspectsContainer *aspect_getContainerForObject(NSObject *self, SEL selector) {
+static Luft_AspectsContainer *aspect_getContainerForObject(NSObject *self, SEL selector) {
     NSCParameterAssert(self);
     SEL aliasSelector = aspect_aliasForSelector(selector);
-    AspectsContainer *aspectContainer = objc_getAssociatedObject(self, aliasSelector);
+    Luft_AspectsContainer *aspectContainer = objc_getAssociatedObject(self, aliasSelector);
     if (!aspectContainer) {
-        aspectContainer = [AspectsContainer new];
+        aspectContainer = [Luft_AspectsContainer new];
         objc_setAssociatedObject(self, aliasSelector, aspectContainer, OBJC_ASSOCIATION_RETAIN);
     }
     return aspectContainer;
 }
 
-static AspectsContainer *aspect_getContainerForClass(Class klass, SEL selector) {
+static Luft_AspectsContainer *aspect_getContainerForClass(Class klass, SEL selector) {
     NSCParameterAssert(klass);
-    AspectsContainer *classContainer = nil;
+    Luft_AspectsContainer *classContainer = nil;
     do {
         classContainer = objc_getAssociatedObject(klass, selector);
         if (classContainer.hasAspects) break;
@@ -600,7 +600,7 @@ static BOOL aspect_isSelectorAllowedAndTrack(NSObject *self, SEL selector, Aspec
         NSMutableDictionary *swizzledClassesDict = aspect_getSwizzledClassesDict();
         Class currentClass = [self class];
 
-        AspectTracker *tracker = swizzledClassesDict[currentClass];
+        Luft_AspectTracker *tracker = swizzledClassesDict[currentClass];
         if ([tracker subclassHasHookedSelectorName:selectorName]) {
             NSSet *subclassTracker = [tracker subclassTrackersHookingSelectorName:selectorName];
             NSSet *subclassNames = [subclassTracker valueForKey:@"trackedClassName"];
@@ -624,11 +624,11 @@ static BOOL aspect_isSelectorAllowedAndTrack(NSObject *self, SEL selector, Aspec
 
         // Add the selector as being modified.
         currentClass = klass;
-        AspectTracker *subclassTracker = nil;
+        Luft_AspectTracker *subclassTracker = nil;
         do {
             tracker = swizzledClassesDict[currentClass];
             if (!tracker) {
-                tracker = [[AspectTracker alloc] initWithTrackedClass:currentClass];
+                tracker = [[Luft_AspectTracker alloc] initWithTrackedClass:currentClass];
                 swizzledClassesDict[(id<NSCopying>)currentClass] = tracker;
             }
             if (subclassTracker) {
@@ -653,9 +653,9 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
     NSMutableDictionary *swizzledClassesDict = aspect_getSwizzledClassesDict();
     NSString *selectorName = NSStringFromSelector(selector);
     Class currentClass = [self class];
-    AspectTracker *subclassTracker = nil;
+    Luft_AspectTracker *subclassTracker = nil;
     do {
-        AspectTracker *tracker = swizzledClassesDict[currentClass];
+        Luft_AspectTracker *tracker = swizzledClassesDict[currentClass];
         if (subclassTracker) {
             [tracker removeSubclassTracker:subclassTracker hookingSelectorName:selectorName];
         } else {
@@ -670,7 +670,7 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
 
 @end
 
-@implementation AspectTracker
+@implementation Luft_AspectTracker
 
 - (id)initWithTrackedClass:(Class)trackedClass {
     if (self = [super init]) {
@@ -685,7 +685,7 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
     return self.selectorNamesToSubclassTrackers[selectorName] != nil;
 }
 
-- (void)addSubclassTracker:(AspectTracker *)subclassTracker hookingSelectorName:(NSString *)selectorName {
+- (void)addSubclassTracker:(Luft_AspectTracker *)subclassTracker hookingSelectorName:(NSString *)selectorName {
     NSMutableSet *trackerSet = self.selectorNamesToSubclassTrackers[selectorName];
     if (!trackerSet) {
         trackerSet = [NSMutableSet new];
@@ -693,7 +693,7 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
     }
     [trackerSet addObject:subclassTracker];
 }
-- (void)removeSubclassTracker:(AspectTracker *)subclassTracker hookingSelectorName:(NSString *)selectorName {
+- (void)removeSubclassTracker:(Luft_AspectTracker *)subclassTracker hookingSelectorName:(NSString *)selectorName {
     NSMutableSet *trackerSet = self.selectorNamesToSubclassTrackers[selectorName];
     [trackerSet removeObject:subclassTracker];
     if (trackerSet.count == 0) {
@@ -702,7 +702,7 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
 }
 - (NSSet *)subclassTrackersHookingSelectorName:(NSString *)selectorName {
     NSMutableSet *hookingSubclassTrackers = [NSMutableSet new];
-    for (AspectTracker *tracker in self.selectorNamesToSubclassTrackers[selectorName]) {
+    for (Luft_AspectTracker *tracker in self.selectorNamesToSubclassTrackers[selectorName]) {
         if ([tracker.selectorNames containsObject:selectorName]) {
             [hookingSubclassTrackers addObject:tracker];
         }
@@ -805,7 +805,7 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
 ///////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - AspectIdentifier
 
-@implementation AspectIdentifier
+@implementation Luft_AspectIdentifier
 
 + (instancetype)identifierWithSelector:(SEL)selector object:(id)object options:(AspectOptions)options block:(id)block error:(NSError **)error {
     NSCParameterAssert(block);
@@ -815,9 +815,9 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
         return nil;
     }
 
-    AspectIdentifier *identifier = nil;
+    Luft_AspectIdentifier *identifier = nil;
     if (blockSignature) {
-        identifier = [AspectIdentifier new];
+        identifier = [Luft_AspectIdentifier new];
         identifier.selector = selector;
         identifier.block = block;
         identifier.blockSignature = blockSignature;
@@ -879,13 +879,13 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
 ///////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - AspectsContainer
 
-@implementation AspectsContainer
+@implementation Luft_AspectsContainer
 
 - (BOOL)hasAspects {
     return self.beforeAspects.count > 0 || self.insteadAspects.count > 0 || self.afterAspects.count > 0;
 }
 
-- (void)addAspect:(AspectIdentifier *)aspect withOptions:(AspectOptions)options {
+- (void)addAspect:(Luft_AspectIdentifier *)aspect withOptions:(AspectOptions)options {
     NSParameterAssert(aspect);
     NSUInteger position = options&AspectPositionFilter;
     switch (position) {
@@ -920,7 +920,7 @@ static void aspect_deregisterTrackedSelector(id self, SEL selector) {
 ///////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - AspectInfo
 
-@implementation AspectInfo
+@implementation Luft_AspectInfo
 
 @synthesize arguments = _arguments;
 

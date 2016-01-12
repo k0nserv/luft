@@ -1,5 +1,7 @@
 ## Master
 
+- Prefix more parts of Aspects - [Hugo Tunius](https://github.com/k0nserv)
+
 ## 1.3
 - Add Xcode 7.3 compatibility uuid - [Hugo Tunius](https://github.com/k0nserv)
 
