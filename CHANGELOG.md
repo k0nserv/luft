@@ -1,4 +1,6 @@
 ## Master
+
+## 1.3
 - Add Xcode 7.3 compatibility uuid - [Hugo Tunius](https://github.com/k0nserv)
 
 - Prefix all the [Aspects](https://github.com/steipete/Aspects) symbols to avoid unwanted terminal output with Carthage #24 - [Emil Bogren](https://twitter.com/bogrenemil)
