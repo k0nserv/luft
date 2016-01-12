@@ -1,4 +1,6 @@
 ## Master
+- Prefix all the [Aspects](https://github.com/steipete/Aspects) symbols to avoid unwanted terminal output with Carthage #24 - [Emil Bogren](https://twitter.com/bogrenemil)
+
 - Improved support for ViewController identification by excluding categories and classes not ending in ViewController #22 - [Duncan Cunningham](https://github.com/sirnacnud)
 
 ## 1.2
