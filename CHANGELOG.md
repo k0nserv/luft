@@ -1,5 +1,7 @@
 ## Master
 
+## 1.4
+
 - Add lastest Xcode 7.3 compatibility uuid [Emil Bogren](https://github.com/bogren)
 
 - Prefix more parts of Aspects - [Hugo Tunius](https://github.com/k0nserv)
