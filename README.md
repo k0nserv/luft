@@ -4,6 +4,14 @@
 
 Luft aims to help you write shorter, lighter and more readable view controllers. Luft colors your Xcode gutter in a nice green when your view controller is light. When it starts to get a bit heavier, the gutter turns yellow to warn you that it's time to start moving code to other places. If you ignore the warning the gutter eventually turns red as you add more code.
 
+## Xcode 8 and Xcode Extensions
+
+Unfortunately the introduction of Xcode extensions and changes to code signing requirements in Xcode 8 makes loading old plugins more difficult. You can still do it by stripping code signing from Xcode, but it's not something we recommend. I've raised the following radars for changes required to rebuild Luft with Xcode Extensions. Feel free to dupe them.
+
+- https://openradar.appspot.com/radar?id=5503702324477952
+- https://openradar.appspot.com/radar?id=4985435868626944
+- https://openradar.appspot.com/radar?id=5001777682317312
+
 ## Installation
 
 ### Using Alcatraz
