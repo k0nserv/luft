@@ -14,7 +14,7 @@ Luft aims to help you write shorter, lighter and more readable view controllers.
 
 If you don't have it installed, you can install it using:
 
-````
+```bash
 curl -fsSL https://raw.githubusercontent.com/supermarin/Alcatraz/deploy/Scripts/install.sh | sh
 ```
 
@@ -22,7 +22,7 @@ After installing restart Xcode and go to `Window -> PackageManager`(cmd + 9). Fr
 
 ### Manually
 
-````
+```bash
 $ git clone https://github.com/k0nserv/luft.git
 $ cd luft
 $ open Luft.xcodeproj
